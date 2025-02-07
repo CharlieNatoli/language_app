@@ -10,6 +10,9 @@ function App() {
   }
 
   const styles = `
+  .full-page {
+  background: #bfbfbf;
+  }
   .outer-container { 
     display: flex;
     min-height: 100vh;
@@ -37,7 +40,7 @@ function App() {
 
   return <>   
   <style>{styles}</style>
-    <div className="background: #f7f7f7;"></div>
+    <div className="full-page">
     <TitleBar></TitleBar>
     <div className="outer-container">
     <div className="conversation-panel">
@@ -47,6 +50,7 @@ function App() {
     
   <FeedbackPanel >
     </FeedbackPanel>
+  </div>
   </div>
   </div>
   </>  
