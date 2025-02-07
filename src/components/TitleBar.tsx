@@ -39,13 +39,13 @@ const TitleBar = () => {
   
     return (
       <div style={styles.titleBar}>
-        <h1 style={styles.title}>Your Title Here</h1>
+        <h1 style={styles.title}>Charlie's Language App</h1>
         <div style={styles.buttonContainer}>
           <button 
             style={styles.button}
             onClick={() => console.log('Button clicked!')}
           >
-            Action
+            New conversation
           </button>
         </div>
       </div>
