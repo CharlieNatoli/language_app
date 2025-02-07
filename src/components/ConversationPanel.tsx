@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { User, Bot } from 'lucide-react';
+import TextSubmitBox from './TextSubmitBox'
 
 
 type MessageType = 'user' | 'ai';
@@ -124,27 +125,27 @@ const exampleMessages = [
     type: 'user' as MessageType,
     content: "I'd be happy to help you understand how to implement a classification model. Let's break this down into manageable steps and explore the key concepts you'll need to know."
   },
-  {
-    id: 3,
-    type: 'ai' as MessageType,
-    content: "Let's break this down into manageable steps and explore the key concepts you'll need to know."
+  // {
+  //   id: 3,
+  //   type: 'ai' as MessageType,
+  //   content: "Let's break this down into manageable steps and explore the key concepts you'll need to know."
 
-  },
-  {
-    id: 4,
-    type: 'user' as MessageType,
-    content: "I'd be happy to help you understand how to implement a classification model. "
-  },
-  {
-    id: 5,
-    type: 'ai' as MessageType,
-    content: "I'd be happy to help you understand how to implement a classification model. Let's break this down into manageable steps and explore the key concepts you'll need to know."
-  },
-  {
-    id: 6,
-    type: 'user' as MessageType,
-    content: "I'd be happy to help you understand how to implement a classification model. "
-  }
+  // },
+  // {
+  //   id: 4,
+  //   type: 'user' as MessageType,
+  //   content: "I'd be happy to help you understand how to implement a classification model. "
+  // },
+  // {
+  //   id: 5,
+  //   type: 'ai' as MessageType,
+  //   content: "I'd be happy to help you understand how to implement a classification model. Let's break this down into manageable steps and explore the key concepts you'll need to know."
+  // },
+  // {
+  //   id: 6,
+  //   type: 'user' as MessageType,
+  //   content: "I'd be happy to help you understand how to implement a classification model. "
+  // }
 ];
 
 const exampleMessages2 = exampleMessages.map((message) => {
@@ -176,7 +177,8 @@ const ConversationPanel = () => {
               isSelected={selectedId === message.id}
               onSelect={() => setSelectedId(message.id)}
             />
-          ))}
+          ))} 
+          <TextSubmitBox/>
         </div>
       </div>
     </div>
