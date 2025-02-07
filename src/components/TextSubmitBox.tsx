@@ -11,6 +11,7 @@ const TextSubmitBox = () => {
     };
 
     // TODO - add loading state here too
+    
   
     return (
       <div className="container mt-5">
