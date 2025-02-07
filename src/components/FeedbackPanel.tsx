@@ -71,15 +71,17 @@ const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
         Nothing here yet
         </>
     } 
-    
-    return <> 
+    // First add this CSS
+    return  <>  
+    <div> 
         <b> Word Choice</b> <br/>
         {mockFeedback.word_choice}
         <br/><br/><b> Tone</b><br/>
         {mockFeedback.style}
         <br/><br/><b>Grammar</b><br/>
         {mockFeedback.grammar}
-    </>  
+    </div>  
+    </>
  
 }
 
