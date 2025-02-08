@@ -50,7 +50,7 @@ const SpeechBubble: React.FC<SpeechBubbleProps> = ({
 
   // Content container styles
   const contentStyle = {
-    textAlign: 'left' 
+    // textAlign: 'left' 
     // ...(type === 'user' ? { paddingRight: '2rem' } : { paddingLeft: '2rem' })
   };
 
