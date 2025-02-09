@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { User, Bot } from 'lucide-react';
 import TextSubmitBox from './TextSubmitBox'
-
-
-type MessageType = 'user' | 'ai';
-
+import { Message, MessageType } from "./Message"
+ 
 interface SpeechBubbleProps {
     type: MessageType;
     message: string;
@@ -106,13 +104,7 @@ const SpeechBubble: React.FC<SpeechBubbleProps> = ({
       </div>
   );
 };
-
-interface Message {
-    id: number;
-    type: MessageType;
-    content: string;
-  }
-
+ 
 // Example message data
 const exampleMessages = [
   {
@@ -124,7 +116,7 @@ const exampleMessages = [
     id: 2,
     type: 'user' as MessageType,
     content: "I'd be happy to help you understand how to implement a classification model. Let's break this down into manageable steps and explore the key concepts you'll need to know."
-  },
+  } //,
   // {
   //   id: 3,
   //   type: 'ai' as MessageType,
@@ -148,19 +140,25 @@ const exampleMessages = [
   // }
 ];
 
-const exampleMessages2 = exampleMessages.map((message) => {
-  let msg_id  = message.id + exampleMessages.length;
-  return {
-    id: msg_id,
-    type: message.type,
-    content: message.content
-  };
-})
+// const exampleMessages2 = exampleMessages.map((message) => {
+//   let msg_id  = message.id + exampleMessages.length;
+//   return {
+//     id: msg_id,
+//     type: message.type,
+//     content: message.content
+//   };
+// })
+ 
+interface ConversationPanelProps {
+  conversation: Message[];   
+}
 
-
-// The main Example component that we'll export as default
-const ConversationPanel = () => {
+const ConversationPanel = ({ conversation }: ConversationPanelProps) => {
     const [selectedId, setSelectedId] = React.useState(-1);
+
+    console.log("CONVO PANEL")
+    console.log(typeof conversation);
+    console.log(conversation)
 
   
   return (
@@ -169,7 +167,7 @@ const ConversationPanel = () => {
       {/* Inner container for content width */} 
       <div className="w-3/5 mx-auto p-4">
         <div className="h-96 overflow-y-auto space-y-8">  
-          {exampleMessages.concat(exampleMessages2).map((message) => (
+          {conversation.map((message: Message) => (
             <SpeechBubble
               key={message.id}
               type={message.type}
@@ -185,4 +183,4 @@ const ConversationPanel = () => {
   );
 };
 
-export default ConversationPanel;
+export default ConversationPanel; 

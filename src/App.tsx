@@ -1,13 +1,42 @@
 import ConversationPanel from "./components/ConversationPanel";
 import FeedbackPanel from "./components/FeedbackPanel";
-import TitleBar from "./components/TitleBar";
+import TitleBar from "./components/TitleBar"; 
+import { BrowserRouter, Routes, Route } from "react-router";
+import { useState, SyntheticEvent } from "react"
+import { Message, MessageType } from "./components/Message";
 
 function App() {
+  const [conversation, setConversation] = useState<Message[]>([]);
+  const handleStartConversation = async(event: SyntheticEvent) => {
+      console.log("Clicked button")
+      const response = await fetch('http://127.0.0.1:5000/new_conversation', {
+          method: 'POST',
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const jsonData = await response.json();
 
+      console.log("Got data") 
+      console.log(typeof jsonData);
+      console.log(jsonData)
+      
+      const returnMessages: Message[] = jsonData.convo.map((item: Message) => {
+        if (!item.id || !item.type || !item.content) {
+            throw new Error('Invalid message format');
+        }
+        return {
+            id: Number(item.id),
+            type: item.type,
+            content: String(item.content)
+        };
+    });
+      
+      setConversation(returnMessages);
+      // setLoading(false);
+      // TODO -loading states
+  } 
 
-  const handleSelectItem = (animal: string) => {
-    console.log(animal);
-  }
 
   const styles = `
   .full-page {
@@ -35,25 +64,35 @@ function App() {
     width: 50%;
     height: 100vh;
     padding: 1rem;
-  }
-`;
+  }`
+  ;
 
-  return <>   
-  <style>{styles}</style>
-    <div className="full-page">
-    <TitleBar></TitleBar>
-    <div className="outer-container">
-    <div className="conversation-panel">
-    <ConversationPanel></ConversationPanel>
-  </div>
-  <div className="content-panel">
-    
-  <FeedbackPanel >
-    </FeedbackPanel>
-  </div>
-  </div>
-  </div>
+
+  return ( 
+    <>    
+    <style>{styles}</style>
+    <BrowserRouter><Routes>  
+      <Route path="/" element={
+          
+        <div className="full-page">
+        <TitleBar OnStartConversation={handleStartConversation}></TitleBar>
+        <div className="outer-container">
+        <div className="conversation-panel">
+        {/* <ConversationPanel></ConversationPanel> */}
+        <ConversationPanel conversation={conversation}></ConversationPanel>
+      </div>
+      <div className="content-panel">
+        
+      <FeedbackPanel >
+      </FeedbackPanel>
+      </div>
+      </div>
+      </div>  
+        } />
+    </Routes>
+  </BrowserRouter> 
   </>  
+  )
     ;
 }
 

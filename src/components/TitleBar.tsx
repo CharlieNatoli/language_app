@@ -1,8 +1,13 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useState, useEffect, SyntheticEvent } from "react"; 
+
+ 
+
+interface TitleBarProps {
+  OnStartConversation: (event: SyntheticEvent) => Promise<void>;
+}
 
 
-
-const TitleBar = () => {
+const TitleBar = ({OnStartConversation}: TitleBarProps) => {
     const styles: { [key: string]: CSSProperties } = {
       titleBar: { 
         top: 0,
@@ -43,7 +48,7 @@ const TitleBar = () => {
         <div style={styles.buttonContainer}>
           <button 
             style={styles.button}
-            onClick={() => console.log('Button clicked!')}
+            onClick={OnStartConversation}
           >
             New conversation
           </button>
@@ -52,4 +57,4 @@ const TitleBar = () => {
     );
   };
 
-  export default TitleBar
+export default TitleBar 
