@@ -110,9 +110,9 @@ interface ConversationPanelProps {
 const ConversationPanel = ({ conversation }: ConversationPanelProps) => {
     const [selectedId, setSelectedId] = React.useState(-1);
 
-    console.log("CONVO PANEL")
-    console.log(typeof conversation);
-    console.log(conversation)
+    // console.log("CONVO PANEL")
+    // console.log(typeof conversation);
+    // console.log(conversation)
 
     
     return (

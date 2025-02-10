@@ -1,7 +1,13 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, SyntheticEvent } from 'react';
 
 
-const TextSubmitBox = () => {
+
+interface TextSubmitProps {
+  OnSubmitAnswer: (event: SyntheticEvent) => Promise<void>;
+}
+ 
+ 
+const TextSubmitBox = ({OnSubmitAnswer}: TextSubmitProps) => {
     const [text, setText] = useState('');
   
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => { 
@@ -29,6 +35,7 @@ const TextSubmitBox = () => {
             <button 
               type="submit" 
               className="btn btn-primary border border-gray-300 px-4 py-2 rounded"
+              onClick={OnSubmitAnswer}
             >
               Submit
             </button>
