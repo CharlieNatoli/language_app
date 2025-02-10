@@ -24,30 +24,42 @@ function App() {
       setConversation([])
       setConversationLoading(true)
       const response = await fetch('http://127.0.0.1:5000/new_conversation', {
-          method: 'POST',
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+          },
       });
+
       if (!response.ok) {
         setConversationLoading(false)
         throw new Error('Network response was not ok');
       }
       const jsonData = await response.json();
 
-      const returnMessages: Message[] = jsonData.new_conversation.map((item: Message) => {
-        console.log(item)
-        if (!item.type || !item.content) {
-            throw new Error('Invalid message format');
-        }
-        return {
-            id: 0,
-            type: item.type,
-            content: String(item.content),
-            commentary: null
-        };
+      const message: Message = {
+        id: 0,
+        type: "ai",
+        content: String(jsonData.new_conversation),
+        commentary: null
+    }; 
+
+    //   const returnMessages: Message[] = jsonData.new_conversation.map((item: Message) => {
+    //     console.log(item)
+    //     if (!item.type || !item.content) {
+    //         throw new Error('Invalid message format');
+    //     }
+    //     return {
+    //         id: 0,
+    //         type: item.type,
+    //         content: String(item.content),
+    //         commentary: null
+    //     };
  
-    });
+    // });
     
     setConversationLoading(false);     
-    setConversation(returnMessages); 
+    setConversation([message]); 
       // TODO -loading states
   } 
 
