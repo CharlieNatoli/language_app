@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { User, Bot } from 'lucide-react';
-import TextSubmitBox from './TextSubmitBox'
 import { Message, MessageType } from "./Message"
  
 interface SpeechBubbleProps {
@@ -55,7 +54,6 @@ const SpeechBubble: React.FC<SpeechBubbleProps> = ({
   // Message text styles
   const messageStyle = {
     fontSize: '0.875rem',
-    // lineHeight: '1.625',
     marginLeft: '1rem',
     marginRight: '1rem'
   };
@@ -104,51 +102,7 @@ const SpeechBubble: React.FC<SpeechBubbleProps> = ({
       </div>
   );
 };
- 
-// Example message data
-const exampleMessages = [
-  {
-    id: 1,
-    type: 'ai' as MessageType,
-    content: "Hola. Dime mas sobre tus comidas favoritas? Que te gusta mas y porque? "
-  },
-  {
-    id: 2,
-    type: 'user' as MessageType,
-    content: "I'd be happy to help you understand how to implement a classification model. Let's break this down into manageable steps and explore the key concepts you'll need to know."
-  } //,
-  // {
-  //   id: 3,
-  //   type: 'ai' as MessageType,
-  //   content: "Let's break this down into manageable steps and explore the key concepts you'll need to know."
 
-  // },
-  // {
-  //   id: 4,
-  //   type: 'user' as MessageType,
-  //   content: "I'd be happy to help you understand how to implement a classification model. "
-  // },
-  // {
-  //   id: 5,
-  //   type: 'ai' as MessageType,
-  //   content: "I'd be happy to help you understand how to implement a classification model. Let's break this down into manageable steps and explore the key concepts you'll need to know."
-  // },
-  // {
-  //   id: 6,
-  //   type: 'user' as MessageType,
-  //   content: "I'd be happy to help you understand how to implement a classification model. "
-  // }
-];
-
-// const exampleMessages2 = exampleMessages.map((message) => {
-//   let msg_id  = message.id + exampleMessages.length;
-//   return {
-//     id: msg_id,
-//     type: message.type,
-//     content: message.content
-//   };
-// })
- 
 interface ConversationPanelProps {
   conversation: Message[];   
 }
@@ -160,27 +114,26 @@ const ConversationPanel = ({ conversation }: ConversationPanelProps) => {
     console.log(typeof conversation);
     console.log(conversation)
 
-  
-  return (
-    // Outer container for page margins
-    <div className="min-h-screen">
-      {/* Inner container for content width */} 
-      <div className="w-3/5 mx-auto p-4">
-        <div className="h-96 overflow-y-auto space-y-8">  
-          {conversation.map((message: Message) => (
-            <SpeechBubble
-              key={message.id}
-              type={message.type}
-              message={message.content}
-              isSelected={selectedId === message.id}
-              onSelect={() => setSelectedId(message.id)}
-            />
-          ))} 
-          <TextSubmitBox/>
+    
+    return (
+      // Outer container for page margins
+      <div className="min-h-screen">
+        {/* Inner container for content width */} 
+        <div className="w-3/5 mx-auto p-4">
+          <div className="h-96 overflow-y-auto space-y-8">  
+            {conversation.map((message: Message) => (
+              <SpeechBubble
+                key={message.id}
+                type={message.type}
+                message={message.content}
+                isSelected={selectedId === message.id}
+                onSelect={() => setSelectedId(message.id)}
+              />
+            ))}  
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
 export default ConversationPanel; 

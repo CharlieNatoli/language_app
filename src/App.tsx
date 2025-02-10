@@ -1,7 +1,8 @@
-import ConversationPanel from "./components/ConversationPanel";
+import ConversationPanel from "./components/SpeechBubble";
 import FeedbackPanel from "./components/FeedbackPanel";
 import TitleBar from "./components/TitleBar"; 
 import Loader from "./components/Loader";
+import TextSubmitBox from "./components/TextSubmitBox";
 
 import { BrowserRouter, Routes, Route } from "react-router";
 import { useState, SyntheticEvent } from "react"
@@ -85,13 +86,14 @@ function App() {
         <TitleBar OnStartConversation={handleStartConversation}></TitleBar>
         <div className="outer-container">
         <div className="conversation-panel"> 
+        <ConversationPanel conversation={conversation}></ConversationPanel>
 
          {
         conversationLoading 
           ? <Loader /> 
-          : <ConversationPanel conversation={conversation}></ConversationPanel>
+          :  <></>
       } 
-        {/* <ConversationPanel conversation={conversation}></ConversationPanel> */}
+                  <TextSubmitBox/>
       </div>
       <div className="content-panel">
         

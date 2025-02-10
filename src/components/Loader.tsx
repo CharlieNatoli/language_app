@@ -1,5 +1,6 @@
 import React from 'react';
 
+// TODO = replace with nicer spinner
 const Loader: React.FC = () => {
     return   <>
            <style>
@@ -10,7 +11,7 @@ const Loader: React.FC = () => {
                    justify-content: center;
                    align-items: center;
                    width: 100%;
-                   height: 100%;
+                   height: 100px;
                }
    
                .loader {
