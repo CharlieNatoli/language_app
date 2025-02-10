@@ -33,7 +33,8 @@ function App() {
       const jsonData = await response.json();
 
       const returnMessages: Message[] = jsonData.new_conversation.map((item: Message) => {
-        if (!item.id || !item.type || !item.content) {
+        console.log(item)
+        if (!item.type || !item.content) {
             throw new Error('Invalid message format');
         }
         return {

@@ -92,12 +92,40 @@ const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
  
       if (commentary_for_resp == null) {
         return ""
-    } else {
-      return commentary_for_resp.toString()
+      }
+
+      let commentary_type = conversation[selected_idx].type
+      if (commentary_type == "ai") {
+        console.log('COMMENTARY FOR AI RESP')
+        console.log(commentary_for_resp)
+        let wordsArray  = commentary_for_resp.split("\n");
+        return <>
+             {wordsArray.map((word: string) => ( 
+            <React.Fragment key={word}>
+              {word}
+              <br />
+            </React.Fragment>
+    ))} 
+        </>
+
+      }
+
+      if (commentary_type == "user") {
+
+        console.log('COMMENATRY')
+        console.log(commentary_for_resp)
+ 
+      return <> 
+      <h1>AI feedback</h1>
+      <b>Grammar</b> {commentary_for_resp.grammar}<br></br>
+      <b>Word Choice</b> {commentary_for_resp.word_choice} <br></br>
+      <b>Style</b> {commentary_for_resp.style}
+      </>
+    }
 
     }
       
-    }
+    
 
 
   const styles = ` 
@@ -114,16 +142,13 @@ const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
     return  <>  
     <style>{styles}</style>
     <div>
-    <div className="feedback-panel"> 
-      <h1>Feedback</h1>
-      <div> 
-      { commentary_str(conversation, selected_idx)} 
-      </div>
+    <div className="feedback-panel">   
+      { commentary_str(conversation, selected_idx)}  
     </div>  
     </div>
     </>
- 
-}
+    
+  }
 
 
 export default FeedbackPanel; 
