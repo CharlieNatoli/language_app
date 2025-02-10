@@ -37,7 +37,8 @@ function App() {
         return {
             id: Number(item.id),
             type: item.type,
-            content: String(item.content)
+            content: String(item.content),
+            commentary: null
         };
  
     });
@@ -47,7 +48,8 @@ function App() {
       // TODO -loading states
   } 
 
-  const getAIResponse =async() => {
+  // TODO - pass data back to API 
+  const getAIResponse = async(new_human_message: Message) => {
     setConversationLoading(true)
     const response = await fetch('http://127.0.0.1:5000/add_response', {
         method: 'POST',
@@ -60,22 +62,29 @@ function App() {
 
     let aiResponse = jsonData.results.ai_response
     let feedback = jsonData.results.feedback 
+    let key_words = jsonData.results.key_words 
+    
+    // console.log("ai response to add to conversation")
+    // console.log(jsonData)
+    // console.log(aiResponse)
 
-
-    console.log("ai response to add to conversation")
-    console.log(jsonData)
-    console.log(aiResponse)
-
+    // TOOD - lastID + 2 very hacky. Find better way
     const lastId2 = conversation.length > 0 ? conversation.at(-1)?.id ?? 0 : 0
     let newAIMessage: Message = 
     {
       id: lastId2 +2,
       type: "ai",
-      content: aiResponse
+      content: aiResponse,
+      commentary: key_words
   }
-      setConversation(prev => [...prev, newAIMessage]);
-      setConversationLoading(false)
+    console.log('conversation',conversation)
+    // let lastHumanMessageWithCommentary: Message = conversation[-1]
+    
+    console.log("lastHumanMessageWithCommentary", new_human_message)
+    new_human_message.commentary = feedback 
 
+    setConversation(prev => [...prev.slice(0, -1), new_human_message, newAIMessage]);
+    setConversationLoading(false)
   }
 
   const handleSubmitAnswer = async(event: SyntheticEvent) => {
@@ -86,7 +95,8 @@ function App() {
       let newHumanMessage: Message =  {
         id: lastId +1,
         type: "user",
-        content: event.target[0].value
+        content: event.target[0].value,
+        commentary: null
       }
 
       setConversation(prev => [...prev, newHumanMessage]);
@@ -99,7 +109,7 @@ function App() {
       // console.log("New conversation state in setter:", newConversation)
       
       // After state updates and re-render, get AI response
-      await getAIResponse();
+      await getAIResponse(newHumanMessage);
       };
  
 
