@@ -4,13 +4,15 @@ import TitleBar from "./components/TitleBar";
 import Loader from "./components/Loader";
 import TextSubmitBox from "./components/TextSubmitBox";
 
+
 import { BrowserRouter, Routes, Route } from "react-router";
-import { useState, SyntheticEvent, useEffect } from "react"
+import  { useState, SyntheticEvent, useEffect } from "react"
 import { Message, MessageType } from "./components/Message"; 
 
 function App() {
   const [conversation, setConversation] = useState<Message[]>([]);
   const [conversationLoading, setConversationLoading] = useState<boolean>(false); 
+  const [selectedId, setSelectedId] = useState(-1);
   
   useEffect(() => {
       console.log("Conversation updated:", conversation)
@@ -35,7 +37,7 @@ function App() {
             throw new Error('Invalid message format');
         }
         return {
-            id: Number(item.id),
+            id: 0,
             type: item.type,
             content: String(item.content),
             commentary: null
@@ -70,8 +72,7 @@ function App() {
 
     // TOOD - lastID + 2 very hacky. Find better way
     const lastId2 = conversation.length > 0 ? conversation.at(-1)?.id ?? 0 : 0
-    let newAIMessage: Message = 
-    {
+    let newAIMessage: Message = {
       id: lastId2 +2,
       type: "ai",
       content: aiResponse,
@@ -145,6 +146,8 @@ function App() {
   }`
   ;
 
+  let selected_idx = 4
+
 
   return ( 
     <>    
@@ -156,7 +159,11 @@ function App() {
         <TitleBar OnStartConversation={handleStartConversation}></TitleBar>
         <div className="outer-container">
         <div className="conversation-panel"> 
-        <ConversationPanel conversation={conversation}></ConversationPanel>
+        <ConversationPanel 
+          conversation={conversation}
+          selectedId={selectedId} 
+          setSelectedId={setSelectedId}
+          ></ConversationPanel>
 
          {
         conversationLoading 
@@ -167,7 +174,7 @@ function App() {
       </div>
       <div className="content-panel">
         
-      <FeedbackPanel >
+      <FeedbackPanel conversation={conversation} selected_idx={selectedId}>
       </FeedbackPanel>
       </div>
       </div>

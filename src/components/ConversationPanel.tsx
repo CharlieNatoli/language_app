@@ -9,6 +9,7 @@ interface SpeechBubbleProps {
     onSelect: () => void;
   }
 
+
 const SpeechBubble: React.FC<SpeechBubbleProps> = ({ 
   type = 'user',
   message = '',
@@ -105,11 +106,11 @@ const SpeechBubble: React.FC<SpeechBubbleProps> = ({
 
 interface ConversationPanelProps {
   conversation: Message[];   
+  selectedId: number;
+  setSelectedId: (id: number) => void; 
 }
 
-const ConversationPanel = ({ conversation }: ConversationPanelProps) => {
-    const [selectedId, setSelectedId] = React.useState(-1);
-
+const ConversationPanel = ({ conversation, selectedId, setSelectedId }: ConversationPanelProps) => { 
     // console.log("CONVO PANEL")
     // console.log(typeof conversation);
     // console.log(conversation)

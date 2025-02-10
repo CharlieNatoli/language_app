@@ -1,4 +1,5 @@
 import React from 'react';
+import { AIAMessageCommentary, HumanMessageCommentary, Message } from './Message';
 // import { Loader2 } from 'lucide-react';
 
 
@@ -12,24 +13,29 @@ interface Feedback {
 }
 
 interface FeedbackPanelProps {
-    feedback?: Feedback,
+    conversation: Array<Message>,
+    selected_idx: number,
     isLoading?: boolean,
     isEmpty?: boolean
 }
 
+// const setFeedback {
+
+// }
+
 const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
-    feedback,
+    conversation,
+    selected_idx,
     isLoading = false,
     isEmpty = false
 }) => {
 
 
-    const mockFeedback: Feedback = {
-        word_choice: "You chose some great words. We love that for you.",
-        style: "Style is ok. ",
-        grammar: "Grammar is amahhhzing. You are muito bom at this.",
-
-    } 
+    // const mockFeedback: Feedback = {
+    //     word_choice: "You chose some great words. We love that for you.",
+    //     style: "Style is ok. ",
+    //     grammar: "Grammar is amahhhzing. You are muito bom at this.",
+    // } 
 
     // isLoading = true
     // TODO - better spinner.
@@ -71,15 +77,38 @@ const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
         Nothing here yet
         </>
     } 
+
+
+
+    function commentary_str(
+      conversation: Array<Message>,
+      selected_idx: number
+    ) {
+      console.log('selectedIdx', selected_idx)
+      if (conversation.length === 0 || selected_idx < 0 ) {
+        return ""
+      } 
+      let commentary_for_resp = conversation[selected_idx].commentary
+ 
+      if (commentary_for_resp == null) {
+        return ""
+    } else {
+      return commentary_for_resp.toString()
+
+    }
+      
+    }
+    
     // First add this CSS
     return  <>  
     <div> 
-        <b> Word Choice</b> <br/>
+      { commentary_str(conversation, selected_idx)}
+        {/* <b> Word Choice</b> <br/>
         {mockFeedback.word_choice}
         <br/><br/><b> Tone</b><br/>
         {mockFeedback.style}
-        <br/><br/><b>Grammar</b><br/>
-        {mockFeedback.grammar}
+        <br/><br/><b>Grammar</b><br/>d
+        {mockFeedback.grammar} */}
     </div>  
     </>
  
