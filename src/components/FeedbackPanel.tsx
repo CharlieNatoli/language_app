@@ -98,18 +98,29 @@ const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
     }
       
     }
+
+
+  const styles = ` 
+  .feedback-panel { 
+  background: #e6cdb8; 
+  border-radius: 25px;
+  min-height: 200px;
+  padding: 20px;
+
+  } ` ;
+
     
     // First add this CSS
     return  <>  
-    <div> 
-      { commentary_str(conversation, selected_idx)}
-        {/* <b> Word Choice</b> <br/>
-        {mockFeedback.word_choice}
-        <br/><br/><b> Tone</b><br/>
-        {mockFeedback.style}
-        <br/><br/><b>Grammar</b><br/>d
-        {mockFeedback.grammar} */}
+    <style>{styles}</style>
+    <div>
+    <div className="feedback-panel"> 
+      <h1>Feedback</h1>
+      <div> 
+      { commentary_str(conversation, selected_idx)} 
+      </div>
     </div>  
+    </div>
     </>
  
 }

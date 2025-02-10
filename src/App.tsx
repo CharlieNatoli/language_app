@@ -143,8 +143,7 @@ function App() {
     width: 50%;
     height: 100vh;
     padding: 1rem;
-  }`
-  ;
+  }`;
 
   let selected_idx = 4
 
