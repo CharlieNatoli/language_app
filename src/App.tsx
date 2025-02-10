@@ -19,6 +19,7 @@ function App() {
 
   const handleStartConversation = async(event: SyntheticEvent) => {
       console.log("Clicked submit conversation button")
+      setConversation([])
       setConversationLoading(true)
       const response = await fetch('http://127.0.0.1:5000/new_conversation', {
           method: 'POST',
@@ -77,14 +78,15 @@ function App() {
 
   }
 
-  const handleSubmitAnswer =async(event: SyntheticEvent) => {
+  const handleSubmitAnswer = async(event: SyntheticEvent) => {
       console.log("Clicked submit answer button")
+      console.log(event)
 
       const lastId = conversation.length > 0 ? conversation.at(-1)?.id ?? 0 : 0
       let newHumanMessage: Message =  {
         id: lastId +1,
         type: "user",
-        content: "meow meow "
+        content: event.target[0].value
       }
 
       setConversation(prev => [...prev, newHumanMessage]);

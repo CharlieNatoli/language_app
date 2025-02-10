@@ -8,25 +8,20 @@ interface TextSubmitProps {
  
  
 const TextSubmitBox = ({OnSubmitAnswer}: TextSubmitProps) => {
-    const [text, setText] = useState('');
-  
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => { 
-        e.preventDefault();
-        console.log('Submitted text:', text);
-      // TODO - ADD SUBMISSION LOGIC HERE
-    };
-
-    // TODO - add loading state here too
-    
+    // const [text, setText] = useState('');
   
     return (
       <div className="container mt-5">
-        <form onSubmit={handleSubmit} className="w-full">
+      <form onSubmit={(e) => {
+        e.preventDefault(); // Prevent default form submission
+        console.log("EVENT IS HERE", e)
+        OnSubmitAnswer(e); // Pass the text to your handler
+      }} className="w-full">
           <div className="mb-3">
             <textarea
               className="form-control w-full border border-gray-300 rounded p-2"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
+              // value={text}
+              // onChange={(e) => setText(e.target.value)}
               rows={4}
               placeholder="Enter your text here..."
             />
@@ -35,7 +30,6 @@ const TextSubmitBox = ({OnSubmitAnswer}: TextSubmitProps) => {
             <button 
               type="submit" 
               className="btn btn-primary border border-gray-300 px-4 py-2 rounded"
-              onClick={OnSubmitAnswer}
             >
               Submit
             </button>
