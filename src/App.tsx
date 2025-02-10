@@ -7,7 +7,7 @@ import TextSubmitBox from "./components/TextSubmitBox";
 
 import { BrowserRouter, Routes, Route } from "react-router";
 import  { useState, SyntheticEvent, useEffect } from "react"
-import { Message, MessageType } from "./components/Message"; 
+import { Message, MessageType, AIMessageCommentary } from "./components/Message"; 
 
 function App() {
   const [conversation, setConversation] = useState<Message[]>([]);
@@ -20,7 +20,7 @@ function App() {
 
 
   const handleStartConversation = async(event: SyntheticEvent) => {
-      console.log("Clicked submit conversation button")
+      // console.log("Clicked submit conversation button")
       setConversation([])
       setConversationLoading(true)
       const response = await fetch('http://127.0.0.1:5000/new_conversation', {
@@ -43,31 +43,23 @@ function App() {
         content: String(jsonData.new_conversation),
         commentary: null
     }; 
-
-    //   const returnMessages: Message[] = jsonData.new_conversation.map((item: Message) => {
-    //     console.log(item)
-    //     if (!item.type || !item.content) {
-    //         throw new Error('Invalid message format');
-    //     }
-    //     return {
-    //         id: 0,
-    //         type: item.type,
-    //         content: String(item.content),
-    //         commentary: null
-    //     };
- 
-    // });
     
     setConversationLoading(false);     
     setConversation([message]); 
       // TODO -loading states
   } 
 
-  // TODO - pass data back to API 
-  const getAIResponse = async(new_human_message: Message) => {
-    setConversationLoading(true)
-    const response = await fetch('http://127.0.0.1:5000/add_response', {
+
+  const getAIResponse = async(newConversation: [Message]) => {
+    setConversationLoading(true) 
+    
+    const response = await fetch('http://127.0.0.1:5000/continue_conversation', {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Accept': 'application/json',
+        },
+        body: JSON.stringify({conversation: newConversation}),
     });
     if (!response.ok) {
       setConversationLoading(false)
@@ -79,51 +71,58 @@ function App() {
     let feedback = jsonData.results.feedback 
     let key_words = jsonData.results.key_words 
     
-    // console.log("ai response to add to conversation")
-    // console.log(jsonData)
-    // console.log(aiResponse)
-
     // TOOD - lastID + 2 very hacky. Find better way
-    const lastId2 = conversation.length > 0 ? conversation.at(-1)?.id ?? 0 : 0
+    const lastId2 = newConversation.length > 0 ? newConversation.at(-1)?.id ?? 0 : 0
     let newAIMessage: Message = {
-      id: lastId2 +2,
+      id: lastId2 +1,
       type: "ai",
       content: aiResponse,
       commentary: key_words
-  }
-    console.log('conversation',conversation)
-    // let lastHumanMessageWithCommentary: Message = conversation[-1]
-    
-    console.log("lastHumanMessageWithCommentary", new_human_message)
+  } 
+
+    let new_human_message = newConversation[newConversation.length - 1]
     new_human_message.commentary = feedback 
 
-    setConversation(prev => [...prev.slice(0, -1), new_human_message, newAIMessage]);
+    let newConversationWithAIFeedback = [...newConversation.slice(0, -1), new_human_message, newAIMessage]
+
+
+    console.log("NEW CONVERSATION WITH AI ANSWER AND HUMAN FEEDBACK ADDED")
+    console.log(newConversationWithAIFeedback)
+
+    setConversation(newConversationWithAIFeedback) 
     setConversationLoading(false)
+
+  } 
+
+  const addHumanAnswer = async(event: SyntheticEvent) => {
+
+    const lastId = conversation.length > 0 ? conversation.at(-1)?.id ?? 0 : 0
+    let newHumanMessage: Message =  {
+      id: lastId + 1,
+      type: "user",
+      content: event.target[0].value,
+      commentary: null
+    }
+
+    let ConversationWithHumanAnswer = [...conversation, newHumanMessage]
+    console.log('CONVERSATION')
+    console.log(conversation)
+    console.log('HUMAN ANSWER ADDED')
+    console.log(newHumanMessage)
+    console.log("NEW CONVERSATION WITH HUMAN ANSWER ADDED")
+    console.log(ConversationWithHumanAnswer)
+    setConversation(ConversationWithHumanAnswer);
+
+    return ConversationWithHumanAnswer
+
   }
 
   const handleSubmitAnswer = async(event: SyntheticEvent) => {
-      console.log("Clicked submit answer button")
-      console.log(event)
-
-      const lastId = conversation.length > 0 ? conversation.at(-1)?.id ?? 0 : 0
-      let newHumanMessage: Message =  {
-        id: lastId +1,
-        type: "user",
-        content: event.target[0].value,
-        commentary: null
-      }
-
-      setConversation(prev => [...prev, newHumanMessage]);
-      // console.log("Current conversation state:", conversation)
-      // console.log("Adding new message:", newHumanMessage)
-
-      // setConversation(prevConversation => {
-      // console.log("Previous conversation in setter:", prevConversation)
-      // const newConversation = [...prevConversation, newHumanMessage];
-      // console.log("New conversation state in setter:", newConversation)
-      
       // After state updates and re-render, get AI response
-      await getAIResponse(newHumanMessage);
+       
+      let ConversationWithHumanAnswer = await addHumanAnswer(event)
+
+      await getAIResponse(ConversationWithHumanAnswer);
       };
  
 

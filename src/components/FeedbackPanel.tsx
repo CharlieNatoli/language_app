@@ -84,7 +84,7 @@ const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
       conversation: Array<Message>,
       selected_idx: number
     ) {
-      console.log('selectedIdx', selected_idx)
+      // console.log('selectedIdx', selected_idx)
       if (conversation.length === 0 || selected_idx < 0 ) {
         return ""
       } 
@@ -96,8 +96,8 @@ const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
 
       let commentary_type = conversation[selected_idx].type
       if (commentary_type == "ai") {
-        console.log('COMMENTARY FOR AI RESP')
-        console.log(commentary_for_resp)
+        // console.log('COMMENTARY FOR AI RESP')
+        // console.log(commentary_for_resp)
         let wordsArray  = commentary_for_resp.split("\n");
         return <>
              {wordsArray.map((word: string) => ( 
@@ -112,8 +112,8 @@ const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
 
       if (commentary_type == "user") {
 
-        console.log('COMMENATRY')
-        console.log(commentary_for_resp)
+        // console.log('COMMENATRY')
+        // console.log(commentary_for_resp)
  
       return <> 
       <h1>AI feedback</h1>
