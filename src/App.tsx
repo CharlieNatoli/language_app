@@ -1,18 +1,24 @@
 import ConversationPanel from "./components/ConversationPanel";
 import FeedbackPanel from "./components/FeedbackPanel";
 import TitleBar from "./components/TitleBar"; 
+import Loader from "./components/Loader";
+
 import { BrowserRouter, Routes, Route } from "react-router";
 import { useState, SyntheticEvent } from "react"
-import { Message, MessageType } from "./components/Message";
+import { Message, MessageType } from "./components/Message"; 
 
 function App() {
   const [conversation, setConversation] = useState<Message[]>([]);
+  const [conversationLoading, setConversationLoading] = useState<boolean>(false);
+
   const handleStartConversation = async(event: SyntheticEvent) => {
       console.log("Clicked button")
+      setConversationLoading(true)
       const response = await fetch('http://127.0.0.1:5000/new_conversation', {
           method: 'POST',
       });
       if (!response.ok) {
+        setConversationLoading(false)
         throw new Error('Network response was not ok');
       }
       const jsonData = await response.json();
@@ -30,10 +36,11 @@ function App() {
             type: item.type,
             content: String(item.content)
         };
+ 
     });
-      
-      setConversation(returnMessages);
-      // setLoading(false);
+    
+    setConversationLoading(false);     
+    setConversation(returnMessages); 
       // TODO -loading states
   } 
 
@@ -77,9 +84,14 @@ function App() {
         <div className="full-page">
         <TitleBar OnStartConversation={handleStartConversation}></TitleBar>
         <div className="outer-container">
-        <div className="conversation-panel">
-        {/* <ConversationPanel></ConversationPanel> */}
-        <ConversationPanel conversation={conversation}></ConversationPanel>
+        <div className="conversation-panel"> 
+
+         {
+        conversationLoading 
+          ? <Loader /> 
+          : <ConversationPanel conversation={conversation}></ConversationPanel>
+      } 
+        {/* <ConversationPanel conversation={conversation}></ConversationPanel> */}
       </div>
       <div className="content-panel">
         
