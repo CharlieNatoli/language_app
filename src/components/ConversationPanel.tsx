@@ -71,11 +71,7 @@ const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
     return (
       <div style={wrapperStyle} className="speech-bubble">
         {type == "user" ? (
-          <div
-            style={bubbleStyle}
-            onClick={onSelectBubble}
-            dont-deselect-feedback-panel
-          >
+          <div style={bubbleStyle} onClick={onSelectBubble}>
             <div style={contentStyle}>
               <p style={messageStyle}>{message}</p>
             </div>
@@ -84,11 +80,7 @@ const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
             </div>
           </div>
         ) : (
-          <div
-            style={bubbleStyle}
-            onClick={onSelectBubble}
-            dont-deselect-feedback-panel
-          >
+          <div style={bubbleStyle} onClick={onSelectBubble}>
             <div style={iconStyle}>
               <IconComponent style={iconComponentStyle} />
             </div>
@@ -108,6 +100,7 @@ interface ConversationPanelProps {
   setSelectedId: (id: number) => void;
 }
 
+// const AppHeader = ({ OnNewTopic }: HeaderProps) => {
 const ConversationPanel = forwardRef<HTMLDivElement, ConversationPanelProps>(
   ({ conversation, selectedId, setSelectedId }, ref) => {
     return (

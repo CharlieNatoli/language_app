@@ -15,13 +15,10 @@ function App() {
     useState<boolean>(false);
   const [selectedId, setSelectedId] = useState(-1);
   const conversationRef = useRef(null);
-  // setSelectedId(-1);
 
   // Remove feedback panel if clicks outside
   useEffect(() => {
     const handleClick = (event) => {
-      // Check if the click was inside the squares
-      // if (feedbackRef.current && !feedbackRef.current.contains(event.target)) {
       if (!event.target.closest(".speech-bubble")) {
         setSelectedId(-1);
       }
