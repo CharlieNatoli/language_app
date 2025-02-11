@@ -1,10 +1,17 @@
 import { CSSProperties, MouseEvent, useState } from "react";
+import LanguageSelector from "./LanguageSelector";
 
 interface HeaderProps {
   OnNewTopic: (event: MouseEvent) => Promise<void>;
+  selectedLanguage: string;
+  setSelectedLanguage: (event) => Promise<void>;
 }
 
-const AppHeader = ({ OnNewTopic }: HeaderProps) => {
+const AppHeader = ({
+  OnNewTopic,
+  selectedLanguage,
+  setSelectedLanguage,
+}: HeaderProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const styles: { [key: string]: CSSProperties } = {
@@ -18,7 +25,8 @@ const AppHeader = ({ OnNewTopic }: HeaderProps) => {
     },
     title: {
       position: "absolute",
-      top: "20px",
+      top: "50%",
+      transform: "translateY(-50%)",
       left: "20px",
       fontFamily: "Georgia",
       fontSize: "36px",
@@ -41,6 +49,12 @@ const AppHeader = ({ OnNewTopic }: HeaderProps) => {
       cursor: "pointer",
       fontSize: "26px",
     },
+    languageDropdownContainer: {
+      position: "absolute",
+      top: "10%",
+      left: "100%",
+      transform: "translateX(-100%)",
+    },
   };
 
   return (
@@ -55,6 +69,13 @@ const AppHeader = ({ OnNewTopic }: HeaderProps) => {
         >
           💡 New Topic ✨
         </button>
+      </div>
+      <div style={styles.languageDropdownContainer}>
+        <LanguageSelector
+          setSelectedLanguage={setSelectedLanguage}
+          selectedLanguage={selectedLanguage}
+          OnNewTopic={OnNewTopic}
+        ></LanguageSelector>
       </div>
     </div>
   );

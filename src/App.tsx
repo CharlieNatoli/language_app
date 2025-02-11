@@ -65,12 +65,12 @@ const dummyConvo: Message[] = [
 ];
 
 function App() {
-  // const [conversation, setConversation] = useState<Message[]>([]);
   const [conversation, setConversation] = useState<Message[]>([]);
   const [conversationLoading, setConversationLoading] =
     useState<boolean>(false);
   const [selectedId, setSelectedId] = useState(-1);
   const conversationRef = useRef(null);
+  const [selectedLanguage, setSelectedLanguage] = useState("Spanish");
 
   // Remove feedback panel if clicks outside
   useEffect(() => {
@@ -202,7 +202,11 @@ function App() {
             path="/"
             element={
               <div className="full-page">
-                <AppHeader OnNewTopic={handleNewTopic}></AppHeader>
+                <AppHeader
+                  OnNewTopic={handleNewTopic}
+                  selectedLanguage={selectedLanguage}
+                  setSelectedLanguage={setSelectedLanguage}
+                ></AppHeader>
                 <div className="outer-container">
                   <div className="leftside-panel">
                     <div className="leftside-panel-conversation">
@@ -229,6 +233,7 @@ function App() {
                     ) : (
                       <></>
                     )}
+                    <>{selectedLanguage}</>
                   </div>
                 </div>
               </div>
