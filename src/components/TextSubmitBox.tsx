@@ -1,18 +1,16 @@
-import React, { useState, FormEvent, SyntheticEvent } from "react";
+import { FormEvent } from "react";
 
-interface TextSubmitProps {
-  OnSubmitAnswer: (event: SyntheticEvent) => Promise<void>;
+interface TextSubmitBoxProps {
+  OnSubmitAnswer: (event: FormEvent) => Promise<void>;
 }
 
-const TextSubmitBox = ({ OnSubmitAnswer }: TextSubmitProps) => {
-  // const [text, setText] = useState('');
-
+const TextSubmitBox = ({ OnSubmitAnswer }: TextSubmitBoxProps) => {
   return (
     <div className="container mt-5">
       <form
         onSubmit={(e) => {
-          e.preventDefault(); // Prevent default form submission
-          OnSubmitAnswer(e); // Pass the text to your handler
+          e.preventDefault();
+          OnSubmitAnswer(e);
         }}
         className="w-full"
       >

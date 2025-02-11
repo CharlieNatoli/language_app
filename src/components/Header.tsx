@@ -1,7 +1,7 @@
-import { CSSProperties, SyntheticEvent } from "react";
+import { CSSProperties, MouseEvent } from "react";
 
 interface HeaderProps {
-  OnNewTopic: (event: SyntheticEvent) => Promise<void>;
+  OnNewTopic: (event: MouseEvent) => Promise<void>;
 }
 
 const Header = ({ OnNewTopic }: HeaderProps) => {
