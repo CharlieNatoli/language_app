@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
 
 // TODO = replace with nicer spinner
 const Loader: React.FC = () => {
-    return   <>
-           <style>
-             {`
+  return (
+    <>
+      <style>
+        {`
    
                .spinner-container {
                    display: flex;
@@ -28,10 +29,12 @@ const Loader: React.FC = () => {
                  100% { transform: rotate(360deg); }
                }
              `}
-           </style>
-           <div className="spinner-container">
-           <div className="loader"></div></div>
-         </>
+      </style>
+      <div className="spinner-container">
+        <div className="loader"></div>
+      </div>
+    </>
+  );
 };
 
 export default Loader;
