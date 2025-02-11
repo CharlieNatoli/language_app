@@ -8,14 +8,18 @@ interface AIResponse {
   };
 }
 
-export const startNewTopic = async (): Promise<Message> => {
+export const startNewTopic = async (
+  selectedLanguage: string
+): Promise<Message> => {
   try {
+    console.log("selectedLanguage", selectedLanguage);
     const response = await fetch("http://127.0.0.1:5000/new_topic", {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
+      body: JSON.stringify({ language: selectedLanguage }),
     });
 
     if (!response.ok) {
@@ -36,15 +40,20 @@ export const startNewTopic = async (): Promise<Message> => {
 };
 
 export const getAIResponse = async (
-  conversation: Message[]
+  conversation: Message[],
+  selectedLanguage: string
 ): Promise<AIResponse> => {
+  console.log("selectedLanguage - response", selectedLanguage);
   try {
     const response = await fetch("http://127.0.0.1:5000/submit_answer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ conversation }),
+      body: JSON.stringify({
+        conversation: conversation,
+        language: selectedLanguage,
+      }),
     });
 
     if (!response.ok) {

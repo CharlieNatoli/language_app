@@ -95,7 +95,7 @@ function App() {
       setConversationLoading(true);
       setSelectedId(0);
 
-      const message = await startNewTopic();
+      const message = await startNewTopic(selectedLanguage);
       setConversation([message]);
       setConversationLoading(false);
     } catch (error) {
@@ -127,7 +127,10 @@ function App() {
     setConversationLoading(true);
 
     // get AI response
-    const AIResponse = await getAIResponse(ConversationWithUserAnswer);
+    const AIResponse = await getAIResponse(
+      ConversationWithUserAnswer,
+      selectedLanguage
+    );
 
     // update conversation post-AI response
     let newAIMessage: Message = {
@@ -184,8 +187,6 @@ function App() {
     padding: 1rem; 
   }`;
 
-  // let selected_idx = 4;
-
   useEffect((): void => {
     setConversation(dummyConvo);
   }, []);
@@ -233,7 +234,6 @@ function App() {
                     ) : (
                       <></>
                     )}
-                    <>{selectedLanguage}</>
                   </div>
                 </div>
               </div>

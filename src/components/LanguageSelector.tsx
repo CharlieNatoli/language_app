@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface LanguageSelectorProps {
   setSelectedLanguage: (event) => Promise<void>;
@@ -18,6 +18,12 @@ const LanguageSelector = ({
     { name: "German", flag: "🇩🇪" },
     { name: "Japanese", flag: "🇯🇵" },
   ];
+
+  useEffect(() => {
+    if (selectedLanguage) {
+      OnNewTopic();
+    }
+  }, [selectedLanguage]);
 
   const styles = {
     container: {
@@ -41,10 +47,7 @@ const LanguageSelector = ({
     <div style={styles.container}>
       <select
         value={selectedLanguage}
-        onChange={(e) => {
-          setSelectedLanguage(e.target.value);
-          OnNewTopic();
-        }}
+        onChange={(e) => setSelectedLanguage(e.target.value)}
         style={styles.select}
       >
         {languages.map((lang) => (
