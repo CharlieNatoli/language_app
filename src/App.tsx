@@ -42,24 +42,24 @@ function App() {
     }
   };
 
-  const addAnswerToConversation = async (
-    event: SyntheticEvent,
+  const addMesageToConversation = async (
+    messageText: string,
     type: MessageType,
     commentary: object | null
   ) => {
     const lastId = conversation.length > 0 ? conversation.at(-1)?.id ?? 0 : 0;
-    let newHumanMessage: Message = {
+    let newMessage: Message = {
       id: lastId + 1,
       type: type,
-      content: event.target[0].value,
+      content: messageText,
       commentary: null,
     };
 
-    let ConversationWithHumanAnswer = [...conversation, newHumanMessage];
+    let ConversationWithNewMessage = [...conversation, newMessage];
 
-    setConversation(ConversationWithHumanAnswer);
+    setConversation(ConversationWithNewMessage);
 
-    return ConversationWithHumanAnswer;
+    return ConversationWithNewMessage;
   };
 
   const handleSubmitAnswer = async (event: SyntheticEvent) => {
@@ -67,8 +67,8 @@ function App() {
     const form = event.target as HTMLFormElement;
     const input = form.elements[0] as HTMLInputElement;
 
-    let ConversationWithHumanAnswer = await addAnswerToConversation(
-      event,
+    let ConversationWithHumanAnswer = await addMesageToConversation(
+      event.target[0].value,
       "user",
       null
     );
