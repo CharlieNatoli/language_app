@@ -9,7 +9,63 @@ import { useState, SyntheticEvent, useEffect, useRef } from "react";
 import { Message } from "./components/Message";
 import { getAIResponse, startNewTopic } from "./services/api";
 
+const dummyConvo: Message[] = [
+  {
+    id: 0,
+    type: "ai",
+    content:
+      "¿Cuál es el cambio más significativo que te gustaría ver en tu ciudad o pueblo, y cómo crees que ese cambio podría beneficiar a la comunidad?. ",
+    commentary: {
+      pueblo: "A village. Lorem Ipsum blah blah blah",
+      gustaría: "would like",
+    },
+  },
+  {
+    id: 1,
+    type: "user",
+    content:
+      "¿Cuál es el cambio más significativo que te gustaría ver en tu ciudad o pueblo, y cómo crees que ese cambio podría beneficiar a la comunidad?. ",
+    commentary: { a: "b", c: "blah blah blah" },
+  },
+
+  {
+    id: 2,
+    type: "ai",
+    content:
+      "¿Cuál es el cambio más significativo que te gustaría ver en tu ciudad o pueblo, y cómo crees que ese cambio podría beneficiar a la comunidad?. ",
+    commentary: {
+      pueblo: "A village. Lorem Ipsum blah blah blah",
+      gustaría: "would like",
+    },
+  },
+  {
+    id: 3,
+    type: "user",
+    content:
+      "¿Cuál es el cambio más significativo que te gustaría ver en tu ciudad o pueblo, y cómo crees que ese cambio podría beneficiar a la comunidad?. ",
+    commentary: { a: "b", c: "blah blah blah" },
+  },
+  {
+    id: 4,
+    type: "ai",
+    content:
+      "¿Cuál es el cambio más significativo que te gustaría ver en tu ciudad o pueblo, y cómo crees que ese cambio podría beneficiar a la comunidad?. ",
+    commentary: {
+      pueblo: "A village. Lorem Ipsum blah blah blah",
+      gustaría: "would like",
+    },
+  },
+  {
+    id: 5,
+    type: "user",
+    content:
+      "¿Cuál es el cambio más significativo que te gustaría ver en tu ciudad o pueblo, y cómo crees que ese cambio podría beneficiar a la comunidad?. ",
+    commentary: { a: "b", c: "blah blah blah" },
+  },
+];
+
 function App() {
+  // const [conversation, setConversation] = useState<Message[]>([]);
   const [conversation, setConversation] = useState<Message[]>([]);
   const [conversationLoading, setConversationLoading] =
     useState<boolean>(false);
@@ -55,17 +111,13 @@ function App() {
     return lastId;
   };
 
-  const handleSubmitAnswer = async (event: SyntheticEvent) => {
-    event.preventDefault();
-    const form = event.target as HTMLFormElement;
-    const input = form.elements[0] as HTMLInputElement;
-
+  const handleSubmitAnswer = async (text: string) => {
     // add human response to conversation
     let lastId = getLastIdInConversation();
     let userMessage: Message = {
       id: lastId + 1,
       type: "user",
-      content: event.target[0].value,
+      content: text,
       commentary: null,
     };
 
@@ -100,37 +152,41 @@ function App() {
     setConversationLoading(false);
   };
 
-  const styles = `
+  const styles = ` 
   .full-page {
-  background: #b8b8b8;
-  }  
-  .outer-container { 
-    display: flex;
-    min-height: 100vh;
+    background: #b8b8b8;
+    // max-height: 100vh;
   } 
-
-  .conversation-panel {
-    width: 70%;
-    height: 100vh;
-    overflow-y: auto;
-    padding: 1rem;
-  }  
-  .conversation-panel > div {
-    display: flex;
+  .outer-container { 
+    display: flex; 
+  } 
+  .leftside-panel {
+    width: 80%; 
+    padding: 1rem;  
     flex-direction: column;
     gap: 2rem;
   }
-  .content-panel {
+  .leftside-panel-conversation {
+    height: 50%;
+    overflow-y: auto;
+  }
+  .leftside-panel-textsubmit {
+    height: 30%;
+  }
+  .rightside-panel {
     width: 50%;
     height: 100vh;
     padding: 1rem; 
   }`;
 
-  let selected_idx = 4;
+  // let selected_idx = 4;
 
   useEffect((): void => {
-    handleNewTopic();
+    setConversation(dummyConvo);
   }, []);
+  // useEffect((): void => {
+  //   handleNewTopic();
+  // }, []);
 
   return (
     <>
@@ -143,24 +199,23 @@ function App() {
               <div className="full-page">
                 <AppHeader OnNewTopic={handleNewTopic}></AppHeader>
                 <div className="outer-container">
-                  <div className="conversation-panel">
-                    <ConversationPanel
-                      conversation={conversation}
-                      selectedId={selectedId}
-                      setSelectedId={setSelectedId}
-                      ref={conversationRef}
-                    ></ConversationPanel>
-                    {conversationLoading ? (
-                      <Loader />
-                    ) : (
-                      <>
-                        <TextSubmitBox
-                          OnSubmitAnswer={handleSubmitAnswer}
-                        ></TextSubmitBox>
-                      </>
-                    )}
+                  <div className="leftside-panel">
+                    <div className="leftside-panel-conversation">
+                      <ConversationPanel
+                        conversation={conversation}
+                        selectedId={selectedId}
+                        setSelectedId={setSelectedId}
+                        ref={conversationRef}
+                      ></ConversationPanel>
+                    </div>
+                    <div>{conversationLoading && <Loader />}</div>
+                    <div className="leftside-panel-textsubmit">
+                      <TextSubmitBox
+                        OnSubmitAnswer={handleSubmitAnswer}
+                      ></TextSubmitBox>
+                    </div>
                   </div>
-                  <div className="content-panel">
+                  <div className="rightside-panel">
                     {selectedId >= 0 ? (
                       <FeedbackPanel
                         conversation={conversation}
