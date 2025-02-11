@@ -1,6 +1,6 @@
 import ConversationPanel from "./components/ConversationPanel";
 import FeedbackPanel from "./components/FeedbackPanel";
-import TitleBar from "./components/TitleBar";
+import Header from "./components/Header";
 import Loader from "./components/Loader";
 import TextSubmitBox from "./components/TextSubmitBox";
 
@@ -168,9 +168,7 @@ function App() {
             path="/"
             element={
               <div className="full-page">
-                <TitleBar
-                  OnStartConversation={handleStartConversation}
-                ></TitleBar>
+                <Header OnStartConversation={handleStartConversation}></Header>
                 <div className="outer-container">
                   <div className="conversation-panel">
                     <ConversationPanel
