@@ -1,7 +1,7 @@
 import { CSSProperties, SyntheticEvent } from "react";
 
 interface HeaderProps {
-  OnNewTopic: (event: SyntheticEvent) => VoidFunctionComponent;
+  OnNewTopic: (event: SyntheticEvent) => Promise<void>;
 }
 
 const Header = ({ OnNewTopic }: HeaderProps) => {
