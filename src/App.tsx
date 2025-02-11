@@ -8,6 +8,8 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import { useState, SyntheticEvent, useEffect } from "react";
 import { Message, MessageType } from "./components/Message";
 
+import { getAIResponse, startNewTopic } from "./services/api";
+
 function App() {
   const [conversation, setConversation] = useState<Message[]>([]);
   const [conversationLoading, setConversationLoading] =
@@ -24,92 +26,31 @@ function App() {
     setConversation([]);
     setConversationLoading(true);
     setSelectedId(0);
-    const response = await fetch("http://127.0.0.1:5000/new_conversation", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
+    try {
+      setConversation([]);
+      setConversationLoading(true);
+      setSelectedId(0);
 
-    if (!response.ok) {
+      const message = await startNewTopic();
+      setConversation([message]);
       setConversationLoading(false);
-      throw new Error("Network response was not ok");
+    } catch (error) {
+      console.error("Failed to start new topic:", error);
+      // Add user feedback for error
+    } finally {
+      setConversationLoading(false);
     }
-    const jsonData = await response.json();
-
-    const message: Message = {
-      id: 0,
-      type: "ai",
-      content: String(jsonData.new_conversation),
-      commentary: jsonData.key_words,
-    };
-
-    console.log("MESSAGE");
-    console.log(message);
-    console.log("NEW WORDSS");
-    console.log(jsonData.key_words);
-
-    setConversationLoading(false);
-    setConversation([message]);
-    // TODO -loading states
   };
 
-  const getAIResponse = async (newConversation: [Message]) => {
-    setConversationLoading(true);
-
-    const response = await fetch(
-      "http://127.0.0.1:5000/continue_conversation",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // 'Accept': 'application/json',
-        },
-        body: JSON.stringify({ conversation: newConversation }),
-      }
-    );
-    if (!response.ok) {
-      setConversationLoading(false);
-      throw new Error("Network response was not ok");
-    }
-    const jsonData = await response.json();
-
-    let aiResponse = jsonData.results.ai_response;
-    let feedback = jsonData.results.feedback;
-    let key_words = jsonData.results.key_words;
-
-    // TOOD - lastID + 2 very hacky. Find better way
-    const lastId2 =
-      newConversation.length > 0 ? newConversation.at(-1)?.id ?? 0 : 0;
-    let newAIMessage: Message = {
-      id: lastId2 + 1,
-      type: "ai",
-      content: aiResponse,
-      commentary: key_words,
-    };
-
-    let new_human_message = newConversation[newConversation.length - 1];
-    new_human_message.commentary = feedback;
-
-    let newConversationWithAIFeedback = [
-      ...newConversation.slice(0, -1),
-      new_human_message,
-      newAIMessage,
-    ];
-
-    // console.log("NEW CONVERSATION WITH AI ANSWER AND HUMAN FEEDBACK ADDED")
-    // console.log(newConversationWithAIFeedback)
-
-    setConversation(newConversationWithAIFeedback);
-    setConversationLoading(false);
-  };
-
-  const addHumanAnswer = async (event: SyntheticEvent) => {
+  const addAnswerToConversation = async (
+    event: SyntheticEvent,
+    type: MessageType,
+    commentary: object | null
+  ) => {
     const lastId = conversation.length > 0 ? conversation.at(-1)?.id ?? 0 : 0;
     let newHumanMessage: Message = {
       id: lastId + 1,
-      type: "user",
+      type: type,
       content: event.target[0].value,
       commentary: null,
     };
@@ -122,9 +63,48 @@ function App() {
   };
 
   const handleSubmitAnswer = async (event: SyntheticEvent) => {
-    // After state updates and re-render, get AI response
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    const input = form.elements[0] as HTMLInputElement;
 
-    let ConversationWithHumanAnswer = await addHumanAnswer(event);
+    let ConversationWithHumanAnswer = await addAnswerToConversation(
+      event,
+      "user",
+      null
+    );
+    setConversationLoading(true);
+
+    const AIResponse = await getAIResponse(ConversationWithHumanAnswer);
+
+    console.log("AI RESPONSE", AIResponse);
+    let aiResponse = AIResponse.results.ai_response;
+    let feedback = AIResponse.results.feedback;
+    let key_words = AIResponse.results.key_words;
+
+    // TOOD - lastID + 2 very hacky. Find better way
+    const lastId =
+      ConversationWithHumanAnswer.length > 0
+        ? ConversationWithHumanAnswer.at(-1)?.id ?? 0
+        : 0;
+    let newAIMessage: Message = {
+      id: lastId + 1,
+      type: "ai",
+      content: aiResponse,
+      commentary: key_words,
+    };
+
+    let new_human_message =
+      ConversationWithHumanAnswer[ConversationWithHumanAnswer.length - 1];
+    new_human_message.commentary = feedback;
+
+    let newConversationWithAIFeedback = [
+      ...ConversationWithHumanAnswer.slice(0, -1),
+      new_human_message,
+      newAIMessage,
+    ];
+
+    setConversation(newConversationWithAIFeedback);
+    setConversationLoading(false);
 
     await getAIResponse(ConversationWithHumanAnswer);
   };
