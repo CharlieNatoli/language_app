@@ -16,6 +16,24 @@ function App() {
   const [selectedId, setSelectedId] = useState(-1);
   const feedbackRef = useRef(null);
 
+  // Remove feedback panel if clicks outside
+  useEffect(() => {
+    const handleClick = (event) => {
+      // Check if the click was inside the square
+      if (feedbackRef.current && !feedbackRef.current.contains(event.target)) {
+        setSelectedId(-1);
+      }
+    };
+
+    // Add click event listener to document
+    document.addEventListener("click", handleClick);
+
+    // Cleanup
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
+
   const handleNewTopic = async (): Promise<void> => {
     try {
       setConversation([]);
@@ -141,15 +159,7 @@ function App() {
               <div className="full-page">
                 <AppHeader OnNewTopic={handleNewTopic}></AppHeader>
                 <div className="outer-container">
-                  <div className="conversation-panel">
-                    {/* <div className="button-container">
-                      <button
-                        className="submit-button"
-                        onClick={handleNewTopic}
-                      >
-                        New Topic
-                      </button>
-                    </div> */}
+                  <div className="conversation-panel" ref={feedbackRef}>
                     <ConversationPanel
                       conversation={conversation}
                       selectedId={selectedId}
@@ -166,10 +176,14 @@ function App() {
                     )}
                   </div>
                   <div className="content-panel">
-                    <FeedbackPanel
-                      conversation={conversation}
-                      selectedId={selectedId}
-                    ></FeedbackPanel>
+                    {selectedId >= 0 ? (
+                      <FeedbackPanel
+                        conversation={conversation}
+                        selectedId={selectedId}
+                      ></FeedbackPanel>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </div>
               </div>
