@@ -12,8 +12,8 @@ function App() {
   const [conversation, setConversation] = useState<Message[]>([]);
   const [conversationLoading, setConversationLoading] =
     useState<boolean>(false);
-  // setSelectedId vs setSelectedIdx
   const [selectedId, setSelectedId] = useState(-1);
+  // const [feedbackLoading, setFeedbackLoading] = useState(false);
 
   useEffect(() => {
     console.log("Conversation updated:", conversation);
@@ -185,7 +185,7 @@ function App() {
                   <div className="content-panel">
                     <FeedbackPanel
                       conversation={conversation}
-                      selected_idx={selectedId}
+                      selectedId={selectedId}
                     ></FeedbackPanel>
                   </div>
                 </div>

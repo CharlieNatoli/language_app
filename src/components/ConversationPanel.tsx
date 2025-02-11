@@ -10,10 +10,10 @@ interface SpeechBubbleProps {
 }
 
 const SpeechBubble: React.FC<SpeechBubbleProps> = ({
+  onSelect,
   type = "user",
   message = "",
   isSelected = false,
-  onSelect = () => {},
 }) => {
   // Base styles for the speech bubble
   const bubbleStyle = {
