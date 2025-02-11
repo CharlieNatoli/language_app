@@ -12,11 +12,15 @@ const LanguageSelector = ({
   OnNewTopic,
 }: LanguageSelectorProps) => {
   const languages = [
-    { name: "Chinese", flag: "🇨🇳" },
     { name: "Spanish", flag: "🇪🇸" },
     { name: "French", flag: "🇫🇷" },
     { name: "German", flag: "🇩🇪" },
     { name: "Japanese", flag: "🇯🇵" },
+    { name: "Italian", flag: "🇮🇹" },
+    { name: "Korean", flag: "🇰🇷" },
+    { name: "Chinese", flag: "🇨🇳" },
+    { name: "Portuguese", flag: "🇵🇹" },
+    { name: "Hindi", flag: "🇮🇳" },
   ];
 
   useEffect(() => {
@@ -31,15 +35,19 @@ const LanguageSelector = ({
       fontFamily: "Arial, sans-serif",
     },
     select: {
+      backgroundColor: "transparent",
       padding: "8px 12px",
-      fontSize: "16px",
-      borderRadius: "4px",
-      border: "1px solid #ccc",
+      fontSize: "20px",
+      border: "0px",
       cursor: "pointer",
+      color: "white",
+      top: "10%",
+      left: "10%",
+      transform: "translateY(-20%)",
     },
     option: {
       padding: "8px",
-      fontSize: "16px",
+      fontSize: "20px",
     },
   };
 
