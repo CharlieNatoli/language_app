@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { User, Bot } from "lucide-react";
 import { Message, MessageType } from "./Message";
 
@@ -6,11 +6,11 @@ interface SpeechBubbleProps {
   type: MessageType;
   message: string;
   isSelected: boolean;
-  onSelect: () => void;
+  onSelectBubble: () => void;
 }
 
 const SpeechBubble: React.FC<SpeechBubbleProps> = ({
-  onSelect,
+  onSelectBubble,
   type = "user",
   message = "",
   isSelected = false,
@@ -34,7 +34,6 @@ const SpeechBubble: React.FC<SpeechBubbleProps> = ({
   const iconStyle = {
     right: "1rem",
     left: "1rem",
-    // ...(type === 'user' ? { right: '1rem' } : { left: '1rem' })
   };
 
   // Icon styles
@@ -45,10 +44,7 @@ const SpeechBubble: React.FC<SpeechBubbleProps> = ({
   };
 
   // Content container styles
-  const contentStyle = {
-    // textAlign: 'left'
-    // ...(type === 'user' ? { paddingRight: '2rem' } : { paddingLeft: '2rem' })
-  };
+  const contentStyle = {};
 
   // Message text styles
   const messageStyle = {
@@ -70,7 +66,7 @@ const SpeechBubble: React.FC<SpeechBubbleProps> = ({
   return (
     <div style={wrapperStyle}>
       {type == "user" ? (
-        <div style={bubbleStyle} onClick={onSelect}>
+        <div style={bubbleStyle} onClick={onSelectBubble}>
           <div style={contentStyle}>
             <p style={messageStyle}>{message}</p>
           </div>
@@ -79,7 +75,7 @@ const SpeechBubble: React.FC<SpeechBubbleProps> = ({
           </div>
         </div>
       ) : (
-        <div style={bubbleStyle} onClick={onSelect}>
+        <div style={bubbleStyle} onClick={onSelectBubble}>
           <div style={iconStyle}>
             <IconComponent style={iconComponentStyle} />
           </div>
@@ -103,14 +99,8 @@ const ConversationPanel = ({
   selectedId,
   setSelectedId,
 }: ConversationPanelProps) => {
-  // console.log("CONVO PANEL")
-  // console.log(typeof conversation);
-  // console.log(conversation)
-
   return (
-    // Outer container for page margins
     <div className="min-h-screen">
-      {/* Inner container for content width */}
       <div className="w-3/5 mx-auto p-4">
         <div className="h-96 overflow-y-auto space-y-8">
           {conversation.map((message: Message) => (
@@ -119,7 +109,7 @@ const ConversationPanel = ({
               type={message.type}
               message={message.content}
               isSelected={selectedId === message.id}
-              onSelect={() => setSelectedId(message.id)}
+              onSelectBubble={() => setSelectedId(message.id)}
             />
           ))}
         </div>

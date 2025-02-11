@@ -6,7 +6,6 @@ const Loader: React.FC = () => {
     <>
       <style>
         {`
-   
                .spinner-container {
                    display: flex;
                    justify-content: center;
