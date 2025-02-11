@@ -6,8 +6,7 @@ import TextSubmitBox from "./components/TextSubmitBox";
 
 import { BrowserRouter, Routes, Route } from "react-router";
 import { useState, SyntheticEvent, useEffect } from "react";
-import { Message, MessageType } from "./components/Message";
-
+import { Message } from "./components/Message";
 import { getAIResponse, startNewTopic } from "./services/api";
 
 function App() {
@@ -15,17 +14,12 @@ function App() {
   const [conversationLoading, setConversationLoading] =
     useState<boolean>(false);
   const [selectedId, setSelectedId] = useState(-1);
-  // const [feedbackLoading, setFeedbackLoading] = useState(false);
 
   useEffect(() => {
     console.log("Conversation updated:", conversation);
   }, [conversation]);
 
   const handleNewTopic = async (event: SyntheticEvent) => {
-    // console.log("Clicked submit conversation button")
-    setConversation([]);
-    setConversationLoading(true);
-    setSelectedId(0);
     try {
       setConversation([]);
       setConversationLoading(true);
@@ -42,24 +36,9 @@ function App() {
     }
   };
 
-  const addMesageToConversation = async (
-    messageText: string,
-    type: MessageType,
-    commentary: object | null
-  ) => {
+  const getLastIdInConversation = () => {
     const lastId = conversation.length > 0 ? conversation.at(-1)?.id ?? 0 : 0;
-    let newMessage: Message = {
-      id: lastId + 1,
-      type: type,
-      content: messageText,
-      commentary: null,
-    };
-
-    let ConversationWithNewMessage = [...conversation, newMessage];
-
-    setConversation(ConversationWithNewMessage);
-
-    return ConversationWithNewMessage;
+    return lastId;
   };
 
   const handleSubmitAnswer = async (event: SyntheticEvent) => {
@@ -67,46 +46,44 @@ function App() {
     const form = event.target as HTMLFormElement;
     const input = form.elements[0] as HTMLInputElement;
 
-    let ConversationWithHumanAnswer = await addMesageToConversation(
-      event.target[0].value,
-      "user",
-      null
-    );
-    setConversationLoading(true);
-
-    const AIResponse = await getAIResponse(ConversationWithHumanAnswer);
-
-    console.log("AI RESPONSE", AIResponse);
-    let aiResponse = AIResponse.results.ai_response;
-    let feedback = AIResponse.results.feedback;
-    let key_words = AIResponse.results.key_words;
-
-    // TOOD - lastID + 2 very hacky. Find better way
-    const lastId =
-      ConversationWithHumanAnswer.length > 0
-        ? ConversationWithHumanAnswer.at(-1)?.id ?? 0
-        : 0;
-    let newAIMessage: Message = {
+    // add human response to conversation
+    let lastId = getLastIdInConversation();
+    let userMessage: Message = {
       id: lastId + 1,
-      type: "ai",
-      content: aiResponse,
-      commentary: key_words,
+      type: "user",
+      content: event.target[0].value,
+      commentary: null,
     };
 
-    let new_human_message =
-      ConversationWithHumanAnswer[ConversationWithHumanAnswer.length - 1];
-    new_human_message.commentary = feedback;
+    let ConversationWithUserAnswer = [...conversation, userMessage];
+
+    setConversation(ConversationWithUserAnswer);
+    setConversationLoading(true);
+
+    // get AI response
+    const AIResponse = await getAIResponse(ConversationWithUserAnswer);
+
+    // update conversation post-AI response
+    let newAIMessage: Message = {
+      id: lastId + 2,
+      type: "ai",
+      content: AIResponse.results.ai_response,
+      commentary: AIResponse.results.key_words,
+    };
+
+    let userMessageWithCommentary =
+      ConversationWithUserAnswer[ConversationWithUserAnswer.length - 1];
+
+    userMessageWithCommentary.commentary = AIResponse.results.feedback;
 
     let newConversationWithAIFeedback = [
-      ...ConversationWithHumanAnswer.slice(0, -1),
-      new_human_message,
+      ...ConversationWithUserAnswer.slice(0, -1),
+      userMessageWithCommentary,
       newAIMessage,
     ];
 
     setConversation(newConversationWithAIFeedback);
     setConversationLoading(false);
-
-    await getAIResponse(ConversationWithHumanAnswer);
   };
 
   const styles = `
