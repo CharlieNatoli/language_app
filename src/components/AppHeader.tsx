@@ -1,10 +1,12 @@
-import { CSSProperties, MouseEvent } from "react";
+import { CSSProperties, MouseEvent, useState } from "react";
 
 interface HeaderProps {
   OnNewTopic: (event: MouseEvent) => Promise<void>;
 }
 
 const AppHeader = ({ OnNewTopic }: HeaderProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   const styles: { [key: string]: CSSProperties } = {
     Header: {
       top: 0,
@@ -12,24 +14,28 @@ const AppHeader = ({ OnNewTopic }: HeaderProps) => {
       position: "relative",
       width: "100%",
       height: " 80px",
+      backgroundColor: "#575757",
     },
     title: {
       position: "absolute",
       top: "20px",
       left: "20px",
-      fontSize: "20px",
+      fontFamily: "Georgia",
+      fontSize: "36px",
+      color: "white",
       fontWeight: "bold",
     },
     buttonContainer: {
       position: "absolute",
-      left: "80%",
+      left: "50%",
       top: "50%",
       transform: "translate(-50%, -50%)",
     },
     button: {
       padding: "8px 16px",
-      backgroundColor: "#0069d9",
-      color: "white",
+      backgroundColor: "transparent",
+      color: isHovered ? "black" : "white",
+      fontWeight: isHovered ? "bold" : "",
       border: "none",
       borderRadius: "4px",
       cursor: "pointer",
@@ -41,8 +47,13 @@ const AppHeader = ({ OnNewTopic }: HeaderProps) => {
     <div style={styles.Header}>
       <div style={styles.title}>Charlie's Language App</div>
       <div style={styles.buttonContainer}>
-        <button style={styles.button} onClick={OnNewTopic}>
-          New Topic
+        <button
+          style={styles.button}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onClick={OnNewTopic}
+        >
+          💡 New Topic ✨
         </button>
       </div>
     </div>
