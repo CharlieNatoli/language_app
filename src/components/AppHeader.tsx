@@ -12,12 +12,6 @@ const AppHeader = ({ OnNewTopic }: HeaderProps) => {
       position: "relative",
       width: "100%",
       height: " 80px",
-      // width: "100%",
-      // height: "60px",
-      // boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-      // display: "flex",
-      // alignItems: "center",
-      // padding: " 20px",
     },
     title: {
       position: "absolute",
@@ -25,7 +19,6 @@ const AppHeader = ({ OnNewTopic }: HeaderProps) => {
       left: "20px",
       fontSize: "20px",
       fontWeight: "bold",
-      // margin: 0,
     },
     buttonContainer: {
       position: "absolute",

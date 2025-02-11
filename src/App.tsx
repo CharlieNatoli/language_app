@@ -154,23 +154,28 @@ function App() {
 
   const styles = ` 
   .full-page {
-    background: #b8b8b8;
-    // max-height: 100vh;
+     background: #b8b8b8;
+    font-family: 'Arial'; 
   } 
   .outer-container { 
-    display: flex; 
+    display: flex;  
+    height: 100vh;
+    overflow: hidden;
   } 
   .leftside-panel {
-    width: 80%; 
-    padding: 1rem;  
+    width: 80%;  
+    display: flex; /* Add this */
     flex-direction: column;
-    gap: 2rem;
+     overflow: hidden;
   }
   .leftside-panel-conversation {
-    height: 50%;
+    padding: 3rem;  
+    height: 80%;
     overflow-y: auto;
+    
   }
-  .leftside-panel-textsubmit {
+  .leftside-panel-textsubmit { 
+    height: 80%;
     height: 30%;
   }
   .rightside-panel {
@@ -207,8 +212,8 @@ function App() {
                         setSelectedId={setSelectedId}
                         ref={conversationRef}
                       ></ConversationPanel>
+                      <div>{conversationLoading && <Loader />}</div>
                     </div>
-                    <div>{conversationLoading && <Loader />}</div>
                     <div className="leftside-panel-textsubmit">
                       <TextSubmitBox
                         OnSubmitAnswer={handleSubmitAnswer}

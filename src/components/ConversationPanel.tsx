@@ -23,29 +23,30 @@ const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
     // Base styles for the speech bubble
     const bubbleStyle = {
       display: "flex",
-      alignItems: "center",
+      justifyContent: "space-between",
       padding: "5px",
       borderRadius: "1rem",
       cursor: "pointer",
+      fontFamily: type === "user" ? "" : "Times New Roman",
+      fontSize: type === "user" ? "18px" : "20px",
       backgroundColor: type === "user" ? "#03346E" : "#6EACDA",
       color: type === "user" ? "#FFFFFF" : "#1F2937",
-      marginLeft: type === "user" ? "auto" : "0",
       ...(isSelected && {
-        boxShadow: "0 0 0 2px #2563EB, 0 0 0 4px #FFFFFF",
+        boxShadow: "0 0 0 2px #2563EB, 0 0 0 4px #e8e8e8",
       }),
     };
 
     // Icon container styles
-    const iconStyle = {
-      right: "1rem",
-      left: "1rem",
-    };
+    const iconStyle = {};
 
     // Icon styles
     const iconComponentStyle = {
-      width: "1.25rem",
-      height: "1.25rem",
-      padding: "1px",
+      width: "35px",
+      height: "35px",
+      padding: "5px",
+      position: "relative",
+      top: "50%",
+      transform: "translateY(-50%)",
     };
 
     // Content container styles
@@ -53,7 +54,6 @@ const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
 
     // Message text styles
     const messageStyle = {
-      fontSize: "18px",
       marginLeft: "1rem",
       marginRight: "1rem",
     };
@@ -61,8 +61,8 @@ const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
     // Wrapper styles for width control
     const wrapperStyle = {
       padding: "5px",
-      paddingRight: type === "ai" ? ("30px" as const) : ("" as const),
-      paddingLeft: type === "ai" ? ("" as const) : ("30px" as const),
+      paddingRight: type === "ai" ? ("30px" as const) : ("5px" as const),
+      paddingLeft: type === "ai" ? ("5px" as const) : ("30px" as const),
     };
 
     const IconComponent = type === "user" ? User : Bot;

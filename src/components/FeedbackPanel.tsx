@@ -14,11 +14,11 @@ interface CommentaryProps {
 
 const commentaryStyles = `
   .commentary-title {
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 16px;
   }
   .commentary-body {
-    font-size: 14px; 
+    font-size: 16px; 
   } 
 `;
 
@@ -66,11 +66,11 @@ const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
   selectedId,
 }) => {
   const styles = ` 
-.feedback-panel { 
-background: #e6cdb8; 
-border-radius: 25px;
-min-height: 200px;
-padding: 20px; 
+  .feedback-panel { 
+  background: #e6cdb8; 
+  border-radius: 25px;
+  min-height: 200px;
+  padding: 20px; 
 
 } `;
 
