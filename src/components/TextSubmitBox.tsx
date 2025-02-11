@@ -17,6 +17,7 @@ const TextSubmitBox = ({ OnSubmitAnswer }: TextSubmitBoxProps) => {
         <div className="mb-3">
           <textarea
             className="form-control w-full border border-gray-300 rounded p-2"
+            style={{ backgroundColor: "#e6e6e6" }}
             rows={4}
             placeholder="Enter your text here..."
           />

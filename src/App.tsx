@@ -102,7 +102,7 @@ function App() {
 
   const styles = `
   .full-page {
-  background: #bfbfbf;
+  background: #b8b8b8;
   }  
   .outer-container { 
     display: flex;
@@ -114,22 +114,7 @@ function App() {
     height: 100vh;
     overflow-y: auto;
     padding: 1rem;
-  } 
-  // .button-container {
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  // }
-  // .submit-button {
-  //   padding: 8px 16px;
-  //   background-color: #007bff;
-  //   color: white; 
-  //   border: none;
-  //   width: 200px;
-  //   border-radius: "4px;
-  //   cursor: pointer;
-  //   font-size: 20px;
-  // },
+  }  
   .conversation-panel > div {
     display: flex;
     flex-direction: column;
@@ -138,7 +123,7 @@ function App() {
   .content-panel {
     width: 50%;
     height: 100vh;
-    padding: 1rem;
+    padding: 1rem; 
   }`;
 
   let selected_idx = 4;

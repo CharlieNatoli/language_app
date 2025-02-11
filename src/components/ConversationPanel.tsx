@@ -27,7 +27,7 @@ const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
       padding: "5px",
       borderRadius: "1rem",
       cursor: "pointer",
-      backgroundColor: type === "user" ? "#3B82F6" : "#DBEAFE",
+      backgroundColor: type === "user" ? "#03346E" : "#6EACDA",
       color: type === "user" ? "#FFFFFF" : "#1F2937",
       marginLeft: type === "user" ? "auto" : "0",
       ...(isSelected && {

@@ -35,7 +35,7 @@ const AppHeader = ({ OnNewTopic }: HeaderProps) => {
     },
     button: {
       padding: "8px 16px",
-      backgroundColor: "#007bff",
+      backgroundColor: "#0069d9",
       color: "white",
       border: "none",
       borderRadius: "4px",
