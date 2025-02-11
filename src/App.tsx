@@ -14,13 +14,15 @@ function App() {
   const [conversationLoading, setConversationLoading] =
     useState<boolean>(false);
   const [selectedId, setSelectedId] = useState(-1);
-  const feedbackRef = useRef(null);
+  const conversationRef = useRef(null);
+  // setSelectedId(-1);
 
   // Remove feedback panel if clicks outside
   useEffect(() => {
     const handleClick = (event) => {
-      // Check if the click was inside the square
-      if (feedbackRef.current && !feedbackRef.current.contains(event.target)) {
+      // Check if the click was inside the squares
+      // if (feedbackRef.current && !feedbackRef.current.contains(event.target)) {
+      if (!event.target.closest(".speech-bubble")) {
         setSelectedId(-1);
       }
     };
@@ -159,11 +161,12 @@ function App() {
               <div className="full-page">
                 <AppHeader OnNewTopic={handleNewTopic}></AppHeader>
                 <div className="outer-container">
-                  <div className="conversation-panel" ref={feedbackRef}>
+                  <div className="conversation-panel">
                     <ConversationPanel
                       conversation={conversation}
                       selectedId={selectedId}
                       setSelectedId={setSelectedId}
+                      ref={conversationRef}
                     ></ConversationPanel>
                     {conversationLoading ? (
                       <Loader />
