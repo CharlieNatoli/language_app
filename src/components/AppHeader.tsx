@@ -4,7 +4,7 @@ interface HeaderProps {
   OnNewTopic: (event: MouseEvent) => Promise<void>;
 }
 
-const Header = ({ OnNewTopic }: HeaderProps) => {
+const AppHeader = ({ OnNewTopic }: HeaderProps) => {
   const styles: { [key: string]: CSSProperties } = {
     Header: {
       top: 0,
@@ -50,4 +50,4 @@ const Header = ({ OnNewTopic }: HeaderProps) => {
   );
 };
 
-export default Header;
+export default AppHeader;
