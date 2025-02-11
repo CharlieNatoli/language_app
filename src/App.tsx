@@ -168,7 +168,7 @@ function App() {
             path="/"
             element={
               <div className="full-page">
-                <Header OnNewTopic={handleNewTopic}></Header>
+                <AppHeader OnNewTopic={handleNewTopic}></AppHeader>
                 <div className="outer-container">
                   <div className="conversation-panel">
                     <ConversationPanel
