@@ -7,11 +7,12 @@ import TextSubmitBox from "./components/TextSubmitBox";
 
 import { BrowserRouter, Routes, Route } from "react-router";
 import  { useState, SyntheticEvent, useEffect } from "react"
-import { Message, MessageType, AIMessageCommentary } from "./components/Message"; 
+import { Message, MessageType } from "./components/Message"; 
 
 function App() {
   const [conversation, setConversation] = useState<Message[]>([]);
   const [conversationLoading, setConversationLoading] = useState<boolean>(false); 
+  // setSelectedId vs setSelectedIdx
   const [selectedId, setSelectedId] = useState(-1);
   
   useEffect(() => {
@@ -23,6 +24,7 @@ function App() {
       // console.log("Clicked submit conversation button")
       setConversation([])
       setConversationLoading(true)
+      setSelectedId(0)
       const response = await fetch('http://127.0.0.1:5000/new_conversation', {
           method: 'GET',
           headers: {
@@ -41,8 +43,13 @@ function App() {
         id: 0,
         type: "ai",
         content: String(jsonData.new_conversation),
-        commentary: null
+        commentary: jsonData.key_words
     }; 
+
+    console.log('MESSAGE')
+    console.log(message)
+    console.log('NEW WORDSS')
+    console.log( jsonData.key_words)
     
     setConversationLoading(false);     
     setConversation([message]); 
@@ -86,8 +93,8 @@ function App() {
     let newConversationWithAIFeedback = [...newConversation.slice(0, -1), new_human_message, newAIMessage]
 
 
-    console.log("NEW CONVERSATION WITH AI ANSWER AND HUMAN FEEDBACK ADDED")
-    console.log(newConversationWithAIFeedback)
+    // console.log("NEW CONVERSATION WITH AI ANSWER AND HUMAN FEEDBACK ADDED")
+    // console.log(newConversationWithAIFeedback)
 
     setConversation(newConversationWithAIFeedback) 
     setConversationLoading(false)
@@ -105,12 +112,7 @@ function App() {
     }
 
     let ConversationWithHumanAnswer = [...conversation, newHumanMessage]
-    console.log('CONVERSATION')
-    console.log(conversation)
-    console.log('HUMAN ANSWER ADDED')
-    console.log(newHumanMessage)
-    console.log("NEW CONVERSATION WITH HUMAN ANSWER ADDED")
-    console.log(ConversationWithHumanAnswer)
+
     setConversation(ConversationWithHumanAnswer);
 
     return ConversationWithHumanAnswer
@@ -167,7 +169,9 @@ function App() {
       <Route path="/" element={
           
         <div className="full-page">
-        <TitleBar OnStartConversation={handleStartConversation}></TitleBar>
+        <TitleBar 
+        OnStartConversation={handleStartConversation}  
+        ></TitleBar>
         <div className="outer-container">
         <div className="conversation-panel"> 
         <ConversationPanel 

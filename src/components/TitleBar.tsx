@@ -3,7 +3,7 @@ import React, { CSSProperties, useState, useEffect, SyntheticEvent } from "react
  
 
 interface TitleBarProps {
-  OnStartConversation: (event: SyntheticEvent) => Promise<void>;
+  OnStartConversation: (event: SyntheticEvent) => Promise<void>; 
 }
 
 

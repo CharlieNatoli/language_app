@@ -19,9 +19,6 @@ interface FeedbackPanelProps {
     isEmpty?: boolean
 }
 
-// const setFeedback {
-
-// }
 
 const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
     conversation,
@@ -87,18 +84,14 @@ const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
       // console.log('selectedIdx', selected_idx)
       if (conversation.length === 0 || selected_idx < 0 ) {
         return ""
-      } 
-      let commentary_for_resp = conversation[selected_idx].commentary
+      }  
  
+      let commentary_for_resp = conversation[selected_idx].commentary
       if (commentary_for_resp == null) {
         return ""
       }
 
-      let message_type = conversation[selected_idx].type 
-      console.log('COMMENTARY FOR RESP')
-      console.log(typeof(commentary_for_resp))
-      console.log(commentary_for_resp)
-      
+      let message_type = conversation[selected_idx].type  
       // TODO - is there dictionary cleanup that can happen here?
       let commentary_for_resp_dict = commentary_for_resp
       // let commentary_for_resp_dict = JSON.parse(commentary_for_resp)
