@@ -12,10 +12,21 @@ interface CommentaryProps {
   title: string;
 }
 
+const commentaryStyles = `
+  .commentary-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  .commentary-body {
+    font-size: 14px; 
+  } 
+`;
+
 const Commentary: React.FC<CommentaryProps> = ({ commentary, title }) => (
   <>
-    <h2>{title}</h2>
-    <div>
+    <style>{commentaryStyles}</style>
+    <h1 className="commentary-title">{title}</h1>
+    <div className="commentary-body">
       {Object.entries(commentary).map(([key, value]) => (
         <div key={key}>
           <b>{key}: </b> {value}
@@ -24,7 +35,6 @@ const Commentary: React.FC<CommentaryProps> = ({ commentary, title }) => (
     </div>
   </>
 );
-
 const FeedbackPanelContents: React.FC<FeedbackPanelProps> = ({
   conversation,
   selectedId,
@@ -60,11 +70,10 @@ const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
 background: #e6cdb8; 
 border-radius: 25px;
 min-height: 200px;
-padding: 20px;
+padding: 20px; 
 
 } `;
 
-  // First add this CSS
   return (
     <>
       <style>{styles}</style>

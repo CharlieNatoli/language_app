@@ -48,7 +48,7 @@ const SpeechBubble: React.FC<SpeechBubbleProps> = ({
 
   // Message text styles
   const messageStyle = {
-    fontSize: "0.875rem",
+    fontSize: "18px",
     marginLeft: "1rem",
     marginRight: "1rem",
   };

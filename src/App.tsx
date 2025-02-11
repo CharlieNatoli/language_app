@@ -5,7 +5,7 @@ import Loader from "./components/Loader";
 import TextSubmitBox from "./components/TextSubmitBox";
 
 import { BrowserRouter, Routes, Route } from "react-router";
-import { useState, SyntheticEvent, useEffect } from "react";
+import { useState, SyntheticEvent, useEffect, useRef } from "react";
 import { Message } from "./components/Message";
 import { getAIResponse, startNewTopic } from "./services/api";
 
@@ -14,10 +14,7 @@ function App() {
   const [conversationLoading, setConversationLoading] =
     useState<boolean>(false);
   const [selectedId, setSelectedId] = useState(-1);
-
-  useEffect(() => {
-    console.log("Conversation updated:", conversation);
-  }, [conversation]);
+  const feedbackRef = useRef(null);
 
   const handleNewTopic = async (): Promise<void> => {
     try {
@@ -89,25 +86,38 @@ function App() {
   const styles = `
   .full-page {
   background: #bfbfbf;
-  }
+  }  
   .outer-container { 
     display: flex;
     min-height: 100vh;
   } 
 
   .conversation-panel {
-    width: 50%;
+    width: 70%;
     height: 100vh;
     overflow-y: auto;
     padding: 1rem;
-  }
-
+  } 
+  // .button-container {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  // }
+  // .submit-button {
+  //   padding: 8px 16px;
+  //   background-color: #007bff;
+  //   color: white; 
+  //   border: none;
+  //   width: 200px;
+  //   border-radius: "4px;
+  //   cursor: pointer;
+  //   font-size: 20px;
+  // },
   .conversation-panel > div {
     display: flex;
     flex-direction: column;
     gap: 2rem;
   }
-
   .content-panel {
     width: 50%;
     height: 100vh;
@@ -132,16 +142,28 @@ function App() {
                 <AppHeader OnNewTopic={handleNewTopic}></AppHeader>
                 <div className="outer-container">
                   <div className="conversation-panel">
+                    {/* <div className="button-container">
+                      <button
+                        className="submit-button"
+                        onClick={handleNewTopic}
+                      >
+                        New Topic
+                      </button>
+                    </div> */}
                     <ConversationPanel
                       conversation={conversation}
                       selectedId={selectedId}
                       setSelectedId={setSelectedId}
                     ></ConversationPanel>
-
-                    {conversationLoading ? <Loader /> : <></>}
-                    <TextSubmitBox
-                      OnSubmitAnswer={handleSubmitAnswer}
-                    ></TextSubmitBox>
+                    {conversationLoading ? (
+                      <Loader />
+                    ) : (
+                      <>
+                        <TextSubmitBox
+                          OnSubmitAnswer={handleSubmitAnswer}
+                        ></TextSubmitBox>
+                      </>
+                    )}
                   </div>
                   <div className="content-panel">
                     <FeedbackPanel

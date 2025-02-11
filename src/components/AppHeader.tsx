@@ -29,7 +29,7 @@ const AppHeader = ({ OnNewTopic }: HeaderProps) => {
     },
     buttonContainer: {
       position: "absolute",
-      left: "50%",
+      left: "80%",
       top: "50%",
       transform: "translate(-50%, -50%)",
     },
@@ -41,7 +41,6 @@ const AppHeader = ({ OnNewTopic }: HeaderProps) => {
       borderRadius: "4px",
       cursor: "pointer",
       fontSize: "26px",
-      // transition: 'background-color 0.2s ease'
     },
   };
 
