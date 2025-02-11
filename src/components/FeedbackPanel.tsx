@@ -1,5 +1,5 @@
 import React from 'react';
-import { AIAMessageCommentary, HumanMessageCommentary, Message } from './Message';
+import { Message } from './Message';
 // import { Loader2 } from 'lucide-react';
 
 
@@ -94,34 +94,28 @@ const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
         return ""
       }
 
-      let commentary_type = conversation[selected_idx].type
-      if (commentary_type == "ai") {
-        // console.log('COMMENTARY FOR AI RESP')
-        // console.log(commentary_for_resp)
-        let wordsArray  = commentary_for_resp.split("\n");
-        return <>
-             {wordsArray.map((word: string) => ( 
-            <React.Fragment key={word}>
-              {word}
-              <br />
-            </React.Fragment>
-    ))} 
-        </>
-
-      }
-
-      if (commentary_type == "user") {
-
-        // console.log('COMMENATRY')
-        // console.log(commentary_for_resp)
+      let message_type = conversation[selected_idx].type 
+      console.log('COMMENTARY FOR RESP')
+      console.log(typeof(commentary_for_resp))
+      console.log(commentary_for_resp)
+      
+      // TODO - is there dictionary cleanup that can happen here?
+      let commentary_for_resp_dict = commentary_for_resp
+      // let commentary_for_resp_dict = JSON.parse(commentary_for_resp)
  
-      return <> 
-      <h1>AI feedback</h1>
-      <b>Grammar</b> {commentary_for_resp.grammar}<br></br>
-      <b>Word Choice</b> {commentary_for_resp.word_choice} <br></br>
-      <b>Style</b> {commentary_for_resp.style}
+      return <>  
+      <h1>{message_type === "ai" ? "New Words:" : "AI Feedback:" }</h1> 
+      <div> 
+       {
+        Object.keys(commentary_for_resp_dict).map(key => (
+          <div key={key}>
+          <b>{key}: </b> {commentary_for_resp_dict[key]}
+          </div>
+          ))
+        }
+      </div>
       </>
-    }
+    
 
     }
       

@@ -2,12 +2,6 @@
 
 export type MessageType = 'user' | 'ai';
 
-// export interface WordDefinition
-
-export interface AIMessageCommentary {
-  id: number,
-  words: string
-}
 
 export interface HumanMessageCommentary {
   id: number,
@@ -20,6 +14,6 @@ export interface Message {
     id : number;
     type: MessageType;
     content: string
-    commentary: HumanMessageCommentary | AIMessageCommentary | null
+    commentary: object | null
   }
  

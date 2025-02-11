@@ -50,7 +50,7 @@ const TitleBar = ({OnStartConversation}: TitleBarProps) => {
             style={styles.button}
             onClick={OnStartConversation}
           >
-            New conversation
+            New Topic
           </button>
         </div>
       </div>
