@@ -19,7 +19,7 @@ function App() {
     console.log("Conversation updated:", conversation);
   }, [conversation]);
 
-  const handleNewTopic = async (event: SyntheticEvent) => {
+  const handleNewTopic = async (): Promise<void> => {
     try {
       setConversation([]);
       setConversationLoading(true);
@@ -115,6 +115,10 @@ function App() {
   }`;
 
   let selected_idx = 4;
+
+  useEffect((): void => {
+    handleNewTopic();
+  }, []);
 
   return (
     <>
