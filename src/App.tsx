@@ -19,7 +19,7 @@ function App() {
     console.log("Conversation updated:", conversation);
   }, [conversation]);
 
-  const handleStartConversation = async (event: SyntheticEvent) => {
+  const handleNewTopic = async (event: SyntheticEvent) => {
     // console.log("Clicked submit conversation button")
     setConversation([]);
     setConversationLoading(true);
@@ -168,7 +168,7 @@ function App() {
             path="/"
             element={
               <div className="full-page">
-                <Header OnStartConversation={handleStartConversation}></Header>
+                <Header OnNewTopic={handleNewTopic}></Header>
                 <div className="outer-container">
                   <div className="conversation-panel">
                     <ConversationPanel
