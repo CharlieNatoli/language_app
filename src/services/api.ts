@@ -39,16 +39,13 @@ export const getAIResponse = async (
   conversation: Message[]
 ): Promise<AIResponse> => {
   try {
-    const response = await fetch(
-      "http://127.0.0.1:5000/continue_conversation",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ conversation }),
-      }
-    );
+    const response = await fetch("http://127.0.0.1:5000/submit_answer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ conversation }),
+    });
 
     if (!response.ok) {
       throw new Error("Network response was not ok");
