@@ -18,19 +18,30 @@ https://www.loom.com/share/b81f46ca389244e9a269ec973a6a0a29?sid=f7b408f1-f32b-48
 
 ## Running Locally
 
-Set up and run the frontend
+1. Clone the frontend
 
 - `git clone git@github.com:CharlieNatoli/language_app.git`
-- `cd {folder for frontend repo}`
+- `cd language_app`
 - `npm install`
+
+2. Run the frontend
+
 - `npm run dev`
 
-Set up and run the backend - see [GitHub repo](https://github.com/CharlieNatoli/language_app_backend)
+3. Clone the backend - see [GitHub repo](https://github.com/CharlieNatoli/language_app_backend)
 
 - `git clone git@github.com:CharlieNatoli/language_app_backend.git`
-- `cd {folder for backend repo}`
+- `cd language_app_backend`
+
+4. Set up your environment
+
 - create an API key with Anthropic
 - `touch .env`
 - add "ANTHROPIC_API_KEY={your_key}" to the .env file
+
+5. Run the backend
+
+- `python -m venv .venv`
 - `source .venv/bin/activate`
-  `flask run --host=0.0.0.0 --port=5001` (note that the frotnend currently expects to call port 5001)
+- `pip install -r requirements.txt`
+- `flask run --host=0.0.0.0 --port=5001` (note that the frotnend currently expects to call port 5001)
