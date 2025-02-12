@@ -21,14 +21,14 @@ https://www.loom.com/share/b81f46ca389244e9a269ec973a6a0a29?sid=f7b408f1-f32b-48
 Set up and run the frontend
 
 - `git clone git@github.com:CharlieNatoli/language_app.git`
-- `cd this_repo_folder`
+- `cd {folder for frontend repo}`
 - `npm install`
-- ` npm run dev`
+- `npm run dev`
 
 Set up and run the backend - see [GitHub repo](https://github.com/CharlieNatoli/language_app_backend)
 
 - `git clone git@github.com:CharlieNatoli/language_app_backend.git`
-- `cd backend_repo_folder`
+- `cd {folder for backend repo}`
 - create an API key with Anthropic
 - `touch .env`
 - add "ANTHROPIC_API_KEY={your_key}" to the .env file
