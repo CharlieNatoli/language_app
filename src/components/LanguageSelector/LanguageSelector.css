@@ -1,0 +1,21 @@
+.language-selector-container {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.language-selector-select {
+  background-color: transparent;
+  padding: 8px 12px;
+  font-size: 20px;
+  border: 0;
+  cursor: pointer;
+  color: white;
+  top: 10%;
+  left: 10%;
+  transform: translateY(-20%);
+}
+
+.language-selector-option {
+  padding: 8px;
+  font-size: 20px;
+}

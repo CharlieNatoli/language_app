@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./LanguageSelector.css";
 
 interface LanguageSelectorProps {
   setSelectedLanguage: (language: string) => Promise<void>;
@@ -29,37 +30,19 @@ const LanguageSelector = ({
     }
   }, [selectedLanguage]);
 
-  const styles = {
-    container: {
-      margin: "20px",
-      fontFamily: "Arial, sans-serif",
-    },
-    select: {
-      backgroundColor: "transparent",
-      padding: "8px 12px",
-      fontSize: "20px",
-      border: "0px",
-      cursor: "pointer",
-      color: "white",
-      top: "10%",
-      left: "10%",
-      transform: "translateY(-20%)",
-    },
-    option: {
-      padding: "8px",
-      fontSize: "20px",
-    },
-  };
-
   return (
-    <div style={styles.container}>
+    <div className="language-selector-container">
       <select
         value={selectedLanguage}
         onChange={(e) => setSelectedLanguage(e.target.value)}
-        style={styles.select}
+        className="language-selector-select"
       >
         {languages.map((lang) => (
-          <option key={lang.name} value={lang.name} style={styles.option}>
+          <option
+            key={lang.name}
+            value={lang.name}
+            className="language-selector-option"
+          >
             {lang.flag} {lang.name}
           </option>
         ))}
