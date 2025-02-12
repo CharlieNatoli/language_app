@@ -1,14 +1,15 @@
-import { FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { ArrowUp } from "lucide-react";
+import "./TextSubmitBox.css";
 
 interface TextSubmitBoxProps {
-  OnSubmitAnswer: (event: FormEvent) => Promise<void>;
+  OnSubmitAnswer: (answer: string) => Promise<void>;
 }
 
 const TextSubmitBox = ({ OnSubmitAnswer }: TextSubmitBoxProps) => {
   const [text, setText] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (text.trim()) {
       OnSubmitAnswer(text);
@@ -16,7 +17,7 @@ const TextSubmitBox = ({ OnSubmitAnswer }: TextSubmitBoxProps) => {
     }
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       if (text.trim()) {
         e.preventDefault();
@@ -33,7 +34,6 @@ const TextSubmitBox = ({ OnSubmitAnswer }: TextSubmitBoxProps) => {
       }}
       style={{
         position: "relative",
-        // width: "100",
         margin: "20px",
       }}
     >
@@ -42,34 +42,12 @@ const TextSubmitBox = ({ OnSubmitAnswer }: TextSubmitBoxProps) => {
         onChange={(e) => setText(e.target.value)}
         rows={4}
         placeholder=""
-        style={{
-          background: "#e4e4e4",
-          width: "100%",
-          height: "auto",
-          padding: "10px",
-          paddingRight: "40px",
-          fontSize: "16px",
-          borderRadius: "4px",
-          border: "1px solid #ccc",
-          outline: "none",
-          resize: "none",
-          lineHeight: "1.5",
-        }}
         onKeyDown={handleKeyDown}
-        className="w-full"
+        className="text-submit-box w-full"
       />
       <button
         type="submit"
-        style={{
-          position: "absolute",
-          right: "8px",
-          top: "20%",
-          transform: "translateY(-50%)",
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          padding: "4px",
-        }}
+        className="text-submit-button"
         onClick={handleSubmit}
       >
         <ArrowUp size={20} color="#666" />
