@@ -13,7 +13,7 @@ export const startNewTopic = async (
 ): Promise<Message> => {
   try {
     console.log("selectedLanguage", selectedLanguage);
-    const response = await fetch("http://127.0.0.1:5000/new_topic", {
+    const response = await fetch("http://127.0.0.1:5001/new_topic", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ export const getAIResponse = async (
 ): Promise<AIResponse> => {
   console.log("selectedLanguage - response", selectedLanguage);
   try {
-    const response = await fetch("http://127.0.0.1:5000/submit_answer", {
+    const response = await fetch("http://127.0.0.1:5001/submit_answer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

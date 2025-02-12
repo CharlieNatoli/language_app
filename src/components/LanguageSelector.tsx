@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 interface LanguageSelectorProps {
-  setSelectedLanguage: (event) => Promise<void>;
+  setSelectedLanguage: (language: string) => Promise<void>;
   selectedLanguage: string;
   OnNewTopic: () => Promise<void>;
 }
