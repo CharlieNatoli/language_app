@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import { useState, SyntheticEvent, useEffect, useRef } from "react";
 import { Message } from "./components/Message";
 import { getAIResponse, startNewTopic } from "./services/api";
+import "./App.css";
 
 const dummyConvo: Message[] = [
   {
@@ -155,38 +156,6 @@ function App() {
     setConversationLoading(false);
   };
 
-  const styles = ` 
-  .full-page {
-     background: #b8b8b8;
-    font-family: 'Arial'; 
-  } 
-  .outer-container { 
-    display: flex;  
-    height: 100vh;
-    overflow: hidden;
-  } 
-  .leftside-panel {
-    width: 80%;  
-    display: flex; /* Add this */
-    flex-direction: column;
-     overflow: hidden;
-  }
-  .leftside-panel-conversation {
-    padding: 3rem;  
-    height: 80%;
-    overflow-y: auto;
-    
-  }
-  .leftside-panel-textsubmit { 
-    height: 80%;
-    height: 30%;
-  }
-  .rightside-panel {
-    width: 50%;
-    height: 100vh;
-    padding: 1rem; 
-  }`;
-
   useEffect((): void => {
     setConversation(dummyConvo);
   }, []);
@@ -196,7 +165,6 @@ function App() {
 
   return (
     <>
-      <style>{styles}</style>
       <BrowserRouter>
         <Routes>
           <Route
