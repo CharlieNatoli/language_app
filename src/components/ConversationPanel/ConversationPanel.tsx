@@ -15,7 +15,6 @@ const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
     { onSelectBubble, type = "user", message = "", isSelected = false },
     ref
   ) => {
-    console.log("isSelected", isSelected);
     return (
       <>
         {type == "user" ? (

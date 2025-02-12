@@ -36,6 +36,7 @@ const FeedbackPanelContents: React.FC<FeedbackPanelProps> = ({
 
   const currentMessage = conversation[selectedId];
   const isLastMessage = selectedId === conversation.length - 1;
+  console.log("currentMessage", currentMessage);
   const commentary = currentMessage.commentary;
 
   const title =
