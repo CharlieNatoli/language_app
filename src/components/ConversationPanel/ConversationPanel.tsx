@@ -15,12 +15,15 @@ const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
     { onSelectBubble, type = "user", message = "", isSelected = false },
     ref
   ) => {
+    console.log("isSelected", isSelected);
     return (
       <>
         {type == "user" ? (
           <div className="speech-bubble-wrapper-user">
             <div
-              className="speech-bubble speech-bubble-user"
+              className={`speech-bubble speech-bubble-user ${
+                isSelected ? "speech-bubble-selected" : ""
+              }`}
               onClick={onSelectBubble}
             >
               <div>
@@ -34,7 +37,9 @@ const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
         ) : (
           <div className="speech-bubble-wrapper-ai">
             <div
-              className="speech-bubble speech-bubble-ai"
+              className={`speech-bubble speech-bubble-ai ${
+                isSelected ? "speech-bubble-selected" : ""
+              }`}
               onClick={onSelectBubble}
             >
               <div>
