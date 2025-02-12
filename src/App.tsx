@@ -5,7 +5,7 @@ import Loader from "./components/Loader/Loader";
 import TextSubmitBox from "./components/TextSubmitBox/TextSubmitBox";
 
 import { BrowserRouter, Routes, Route } from "react-router";
-import { useState, SyntheticEvent, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Message } from "./components/Message";
 import { getAIResponse, startNewTopic } from "./services/api";
 import "./App.css";
@@ -70,7 +70,6 @@ function App() {
   const [conversationLoading, setConversationLoading] =
     useState<boolean>(false);
   const [selectedId, setSelectedId] = useState(-1);
-  const conversationRef = useRef(null);
   const [selectedLanguage, setSelectedLanguage] = useState("Spanish");
 
   // Remove feedback panel if clicks outside
@@ -181,7 +180,6 @@ function App() {
                         conversation={conversation}
                         selectedId={selectedId}
                         setSelectedId={setSelectedId}
-                        ref={conversationRef}
                       ></ConversationPanel>
                       <div>{conversationLoading && <Loader />}</div>
                     </div>
