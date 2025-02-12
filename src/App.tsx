@@ -2,7 +2,7 @@ import ConversationPanel from "./components/ConversationPanel";
 import FeedbackPanel from "./components/FeedbackPanel";
 import AppHeader from "./components/AppHeader/AppHeader";
 import Loader from "./components/Loader";
-import TextSubmitBox from "./components/TextSubmitBox";
+import TextSubmitBox from "./components/TextSubmitBox/TextSubmitBox";
 
 import { BrowserRouter, Routes, Route } from "react-router";
 import { useState, SyntheticEvent, useEffect, useRef } from "react";
