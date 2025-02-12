@@ -21,9 +21,9 @@ Set up and run the frontend
 - `npm install`
 - ` npm run dev`
 
-Set up and run the backend
+Set up and run the backend - see [github page](https://github.com/CharlieNatoli/language_app_backend)
 
-- `git clone TODO`
+- `git clone git@github.com:CharlieNatoli/language_app_backend.git`
 - `cd backend_repo_folder`
 - create an API key with Anthropic
 - `touch .env`
