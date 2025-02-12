@@ -1,6 +1,6 @@
 import ConversationPanel from "./components/ConversationPanel";
 import FeedbackPanel from "./components/FeedbackPanel";
-import AppHeader from "./components/AppHeader";
+import AppHeader from "./components/AppHeader/AppHeader";
 import Loader from "./components/Loader";
 import TextSubmitBox from "./components/TextSubmitBox";
 
