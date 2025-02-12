@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Message } from "../components/Message";
+import { Message } from "./Message";
 import { getAIResponse, startNewTopic } from "./call_backend";
 
 export const useConversation = (selectedLanguage: string) => {

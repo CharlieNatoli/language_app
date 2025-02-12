@@ -1,4 +1,4 @@
-import { Message } from "../components/Message";
+import { Message } from "./Message";
 
 interface AIResponse {
   results: {

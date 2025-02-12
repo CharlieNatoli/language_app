@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { User, Bot } from "lucide-react";
-import { Message, MessageType } from "../Message";
+import { Message, MessageType } from "../../utilities/Message";
 import "./ConversationPanel.css";
 
 interface SpeechBubbleProps {
