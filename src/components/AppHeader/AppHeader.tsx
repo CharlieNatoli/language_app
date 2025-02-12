@@ -3,16 +3,11 @@ import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import "./AppHeader.css";
 
 interface HeaderProps {
-  OnNewTopic: () => Promise<void>;
   selectedLanguage: string;
   setSelectedLanguage: (language: string) => Promise<void>;
 }
 
-const AppHeader = ({
-  OnNewTopic,
-  selectedLanguage,
-  setSelectedLanguage,
-}: HeaderProps) => {
+const AppHeader = ({ selectedLanguage, setSelectedLanguage }: HeaderProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -25,7 +20,6 @@ const AppHeader = ({
           }`}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          onClick={OnNewTopic}
         >
           💡 New Topic ✨
         </button>
@@ -34,7 +28,6 @@ const AppHeader = ({
         <LanguageSelector
           setSelectedLanguage={setSelectedLanguage}
           selectedLanguage={selectedLanguage}
-          OnNewTopic={OnNewTopic}
         ></LanguageSelector>
       </div>
     </div>

@@ -156,12 +156,12 @@ function App() {
     setConversationLoading(false);
   };
 
-  useEffect((): void => {
-    setConversation(dummyConvo);
-  }, []);
   // useEffect((): void => {
-  //   handleNewTopic();
+  //   setConversation(dummyConvo);
   // }, []);
+  useEffect((): void => {
+    handleNewTopic();
+  }, []);
 
   return (
     <>

@@ -4,13 +4,11 @@ import "./LanguageSelector.css";
 interface LanguageSelectorProps {
   setSelectedLanguage: (language: string) => Promise<void>;
   selectedLanguage: string;
-  OnNewTopic: () => Promise<void>;
 }
 
 const LanguageSelector = ({
   setSelectedLanguage,
   selectedLanguage,
-  OnNewTopic,
 }: LanguageSelectorProps) => {
   const languages = [
     { name: "Spanish", flag: "🇪🇸" },
@@ -23,12 +21,6 @@ const LanguageSelector = ({
     { name: "Portuguese", flag: "🇵🇹" },
     { name: "Hindi", flag: "🇮🇳" },
   ];
-
-  useEffect(() => {
-    if (selectedLanguage) {
-      OnNewTopic();
-    }
-  }, [selectedLanguage]);
 
   return (
     <div className="language-selector-container">
