@@ -8,6 +8,10 @@ Language app hopes to change that! You can now converse with an LLM in any langu
 
 Along the way, this also was a chance for me to learn to use React and Javascript, which I hadn't used extensively before.
 
+## Loom Demo
+
+https://www.loom.com/share/b81f46ca389244e9a269ec973a6a0a29?sid=f7b408f1-f32b-487a-994b-cac780a1aaaa
+
 ## App
 
 <img src="https://github.com/CharlieNatoli/language_app/blob/master/assets/language_app_screenshot.png" alt="drawing" width="75%"/>
@@ -21,7 +25,7 @@ Set up and run the frontend
 - `npm install`
 - ` npm run dev`
 
-Set up and run the backend - see [github repo](https://github.com/CharlieNatoli/language_app_backend)
+Set up and run the backend - see [GitHub repo](https://github.com/CharlieNatoli/language_app_backend)
 
 - `git clone git@github.com:CharlieNatoli/language_app_backend.git`
 - `cd backend_repo_folder`
