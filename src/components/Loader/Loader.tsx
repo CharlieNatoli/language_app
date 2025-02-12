@@ -1,7 +1,6 @@
 import React from "react";
 import "./Loader.css";
 
-// TODO = replace with nicer spinner
 const Loader: React.FC = () => {
   return (
     <>

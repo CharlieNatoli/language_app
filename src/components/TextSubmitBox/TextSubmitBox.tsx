@@ -32,10 +32,7 @@ const TextSubmitBox = ({ OnSubmitAnswer }: TextSubmitBoxProps) => {
       onSubmit={(e: FormEvent) => {
         handleSubmit(e);
       }}
-      style={{
-        position: "relative",
-        margin: "20px",
-      }}
+      className="text-submit-box-area"
     >
       <textarea
         value={text}

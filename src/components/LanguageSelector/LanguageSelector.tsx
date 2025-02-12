@@ -27,7 +27,7 @@ const LanguageSelector = ({
       <select
         value={selectedLanguage}
         onChange={(e) => setSelectedLanguage(e.target.value)}
-        className="language-selector-select"
+        className="language-selector-text-area"
       >
         {languages.map((lang) => (
           <option

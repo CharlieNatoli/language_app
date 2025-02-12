@@ -8,24 +8,6 @@ interface FeedbackPanelProps {
   selectedId: number;
 }
 
-interface CommentaryProps {
-  commentary: object;
-  title: string;
-}
-
-const Commentary: React.FC<CommentaryProps> = ({ commentary, title }) => (
-  <>
-    <h1 className="commentary-title">{title}</h1>
-    <div className="commentary-body">
-      {Object.entries(commentary).map(([key, value]) => (
-        <div key={key}>
-          <b>{key}: </b> {value}
-        </div>
-      ))}
-    </div>
-  </>
-);
-
 const FeedbackPanelContents: React.FC<FeedbackPanelProps> = ({
   conversation,
   selectedId,
@@ -36,7 +18,6 @@ const FeedbackPanelContents: React.FC<FeedbackPanelProps> = ({
 
   const currentMessage = conversation[selectedId];
   const isLastMessage = selectedId === conversation.length - 1;
-  console.log("currentMessage", currentMessage);
   const commentary = currentMessage.commentary;
 
   const title =
@@ -50,7 +31,18 @@ const FeedbackPanelContents: React.FC<FeedbackPanelProps> = ({
     return null;
   }
 
-  return <Commentary commentary={commentary} title={title} />;
+  return (
+    <>
+      <h1 className="commentary-title">{title}</h1>
+      <div className="commentary-body">
+        {Object.entries(commentary).map(([key, value]) => (
+          <div key={key}>
+            <b>{key}: </b> {value}
+          </div>
+        ))}
+      </div>
+    </>
+  );
 };
 
 const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
