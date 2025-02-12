@@ -1,4 +1,4 @@
-import ConversationPanel from "./components/ConversationPanel";
+import ConversationPanel from "./components/ConversationPanel/ConversationPanel";
 import FeedbackPanel from "./components/FeedbackPanel/FeedbackPanel";
 import AppHeader from "./components/AppHeader/AppHeader";
 import Loader from "./components/Loader/Loader";

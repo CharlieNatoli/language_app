@@ -1,0 +1,42 @@
+.conversation-icon {
+  width: 35px;
+  height: 35px;
+  padding: 5px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.speech-bubble {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.speech-bubble-user {
+  background-color: #03346e;
+  color: #ffffff;
+  font-size: 18px;
+}
+.speech-bubble-ai {
+  background-color: #6eacda;
+  color: #1f2937;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+}
+.speech-bubble-text-area {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.speech-bubble-wrapper-ai {
+  padding: 5px;
+  padding-left: 5px;
+  padding-right: 30px;
+}
+.speech-bubble-wrapper-user {
+  padding: 5px;
+  padding-left: 30px;
+  padding-right: 5px;
+}
+.speech-bubble-selected {
+}
