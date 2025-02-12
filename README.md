@@ -21,7 +21,7 @@ Set up and run the frontend
 - `npm install`
 - ` npm run dev`
 
-Set up and run the backend - see [github page](https://github.com/CharlieNatoli/language_app_backend)
+Set up and run the backend - see [github repo](https://github.com/CharlieNatoli/language_app_backend)
 
 - `git clone git@github.com:CharlieNatoli/language_app_backend.git`
 - `cd backend_repo_folder`
