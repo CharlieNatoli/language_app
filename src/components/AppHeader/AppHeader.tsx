@@ -5,7 +5,7 @@ import "./AppHeader.css";
 interface HeaderProps {
   OnNewTopic: () => Promise<void>;
   selectedLanguage: string;
-  setSelectedLanguage: () => Promise<void>;
+  setSelectedLanguage: (language: string) => Promise<void>;
 }
 
 const AppHeader = ({

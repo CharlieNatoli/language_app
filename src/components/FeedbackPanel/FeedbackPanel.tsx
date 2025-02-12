@@ -1,5 +1,5 @@
 import React from "react";
-import Loader from "../Loader";
+import Loader from "../Loader/Loader";
 import { Message } from "../Message";
 import "./FeedbackPanel.css";
 
