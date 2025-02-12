@@ -4,10 +4,10 @@ import AppHeader from "./components/AppHeader/AppHeader";
 import Loader from "./components/Loader/Loader";
 import TextSubmitBox from "./components/TextSubmitBox/TextSubmitBox";
 
-import { useConversation } from "./services/ConversationHooks";
-import { deselectFeedbackPanelEffect } from "./services/deselectFeedbackPanelEffect";
+import { useConversation } from "./utilities/ConversationHooks";
+import { deselectFeedbackPanelEffect } from "./utilities/deselectFeedbackPanelEffect";
 import { BrowserRouter, Routes, Route } from "react-router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
 
 function App() {
@@ -38,8 +38,8 @@ function App() {
                   setSelectedLanguage={setSelectedLanguage}
                 ></AppHeader>
                 <div className="outer-container">
-                  <div className="leftside-panel">
-                    <div className="leftside-panel-conversation">
+                  <div className="left-panel">
+                    <div className="left-panel-conversation">
                       <ConversationPanel
                         conversation={conversation}
                         selectedId={selectedId}
@@ -47,13 +47,13 @@ function App() {
                       ></ConversationPanel>
                       <div>{conversationLoading && <Loader />}</div>
                     </div>
-                    <div className="leftside-panel-textsubmit">
+                    <div className="left-panel-textsubmit">
                       <TextSubmitBox
                         OnSubmitAnswer={handleSubmitAnswer}
                       ></TextSubmitBox>
                     </div>
                   </div>
-                  <div className="rightside-panel">
+                  <div className="right-panel">
                     {selectedId >= 0 ? (
                       <FeedbackPanel
                         conversation={conversation}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Message } from "../components/Message";
-import { getAIResponse, startNewTopic } from "../services/call_backend";
+import { getAIResponse, startNewTopic } from "./call_backend";
 
 export const useConversation = (selectedLanguage: string) => {
   const [conversation, setConversation] = useState<Message[]>([]);
