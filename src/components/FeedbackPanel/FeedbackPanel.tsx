@@ -1,6 +1,7 @@
 import React from "react";
-import Loader from "./Loader";
-import { Message } from "./Message";
+import Loader from "../Loader";
+import { Message } from "../Message";
+import "./FeedbackPanel.css";
 
 interface FeedbackPanelProps {
   conversation: Array<Message>;
@@ -8,23 +9,12 @@ interface FeedbackPanelProps {
 }
 
 interface CommentaryProps {
-  commentary: Record<string, string>;
+  commentary: object;
   title: string;
 }
 
-const commentaryStyles = `
-  .commentary-title {
-    font-size: 18px;
-    margin-bottom: 16px;
-  }
-  .commentary-body {
-    font-size: 16px; 
-  } 
-`;
-
 const Commentary: React.FC<CommentaryProps> = ({ commentary, title }) => (
   <>
-    <style>{commentaryStyles}</style>
     <h1 className="commentary-title">{title}</h1>
     <div className="commentary-body">
       {Object.entries(commentary).map(([key, value]) => (
@@ -35,6 +25,7 @@ const Commentary: React.FC<CommentaryProps> = ({ commentary, title }) => (
     </div>
   </>
 );
+
 const FeedbackPanelContents: React.FC<FeedbackPanelProps> = ({
   conversation,
   selectedId,
@@ -65,18 +56,8 @@ const FeedbackPanel: React.FC<FeedbackPanelProps> = ({
   conversation,
   selectedId,
 }) => {
-  const styles = ` 
-  .feedback-panel { 
-  background: #e6cdb8; 
-  border-radius: 25px;
-  min-height: 200px;
-  padding: 20px; 
-
-} `;
-
   return (
     <>
-      <style>{styles}</style>
       <div>
         <div className="feedback-panel">
           <FeedbackPanelContents
