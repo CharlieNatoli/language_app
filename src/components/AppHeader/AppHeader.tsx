@@ -1,13 +1,18 @@
-import { CSSProperties, MouseEvent, useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import "./AppHeader.css";
 
 interface HeaderProps {
+  OnNewTopic: () => Promise<void>;
   selectedLanguage: string;
-  setSelectedLanguage: (language: string) => Promise<void>;
+  setSelectedLanguage: Dispatch<SetStateAction<string>>;
 }
 
-const AppHeader = ({ selectedLanguage, setSelectedLanguage }: HeaderProps) => {
+const AppHeader = ({
+  OnNewTopic,
+  selectedLanguage,
+  setSelectedLanguage,
+}: HeaderProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -18,6 +23,7 @@ const AppHeader = ({ selectedLanguage, setSelectedLanguage }: HeaderProps) => {
           className={`new-topic-button ${
             isHovered ? "new-topic-button-hovered" : ""
           }`}
+          onClick={OnNewTopic}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >

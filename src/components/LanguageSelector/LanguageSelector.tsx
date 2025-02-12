@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import "./LanguageSelector.css";
 
 interface LanguageSelectorProps {
-  setSelectedLanguage: (language: string) => Promise<void>;
+  setSelectedLanguage: Dispatch<SetStateAction<string>>;
   selectedLanguage: string;
 }
 

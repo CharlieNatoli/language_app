@@ -75,8 +75,9 @@ function App() {
 
   // Remove feedback panel if clicks outside
   useEffect(() => {
-    const handleClick = (event) => {
-      if (!event.target.closest(".speech-bubble")) {
+    const handleClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".speech-bubble")) {
         setSelectedId(-1);
       }
     };
@@ -159,9 +160,6 @@ function App() {
   // useEffect((): void => {
   //   setConversation(dummyConvo);
   // }, []);
-  useEffect((): void => {
-    handleNewTopic();
-  }, []);
 
   return (
     <>
