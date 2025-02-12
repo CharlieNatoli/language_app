@@ -10,7 +10,7 @@ Along the way, this also was a chance for me to learn to use React and Javascrip
 
 ## App
 
-![App screenshot](https://github.com/CharlieNatoli/language_app/blob/master/assets/language_app_screenshot.png)
+<img src="https://github.com/CharlieNatoli/language_app/blob/master/assets/language_app_screenshot.png" alt="drawing" width="200"/>
 
 ## Running Locally
 
