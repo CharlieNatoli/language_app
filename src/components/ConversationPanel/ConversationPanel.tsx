@@ -61,7 +61,6 @@ interface ConversationPanelProps {
   setSelectedId: (id: number) => void;
 }
 
-// const AppHeader = ({ OnNewTopic }: HeaderProps) => {
 const ConversationPanel = forwardRef<HTMLDivElement, ConversationPanelProps>(
   ({ conversation, selectedId, setSelectedId }, ref) => {
     return (
