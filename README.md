@@ -14,13 +14,19 @@ Along the way, this also was a chance for me to learn to use React and Javascrip
 
 ## Running Locally
 
-run server: ` npm run dev`
+Set up and run the frontend
 
-- TODO
+- `git clone git@github.com:CharlieNatoli/language_app.git`
+- `cd this_repo_folder`
+- `npm install`
+- ` npm run dev`
 
-- download the backend flask app here: TODO
+Set up and run the backend
 
 - `git clone TODO`
-- `cd repo_folder`
+- `cd backend_repo_folder`
+- create an API key with Anthropic
+- `touch .env`
+- add "ANTHROPIC_API_KEY={your_key}" to the .env file
 - `source .venv/bin/activate`
   `flask run --host=0.0.0.0 --port=5001` (note that the frotnend currently expects to call port 5001)
