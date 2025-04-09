@@ -2,7 +2,7 @@
 
 ## Intro
 
-I spent a lot of time learning Spanish and Chinese back in school, and try to keep up my skills when I can. However, while I can get point across, I'm never sure if I'm speaking **well** - am I using the right words? the right grammar? Language apps like Duolingo, wile great for learning new languages at more basic level, didn't reallyhelp improve these more subtle and advanced areas.
+I spent a lot of time learning Spanish and Chinese back in school, and try to keep up my skills when I can. However, while I can get point across, I'm never sure if I'm speaking **well** - am I using the right words? The right grammar? Language apps like Duolingo, while great for learning new languages at more basic level, didn't really help improve these more subtle and advanced areas.
 
 Language app hopes to change that! You can now converse with an LLM in any language you want. As you go, the tool will also use LLMs to critique your writing, and point out new words you might not know.
 
